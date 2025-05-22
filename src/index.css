@@ -1,11 +1,14 @@
 @import "tailwindcss";
 
-@utility container {
-    padding-inline: .5rem;
-}
+/* @utility container {
+    padding: .5rem;
+} */
 
 @theme {
     --color-primary: var(--color-indigo-500);
+    --color-foreground: var(--color-slate-200);
+    --color-muted: var(--color-slate-400);
+    --color-muted-foreground: var(--color-slate-600)
 }
 
 .lucide {
