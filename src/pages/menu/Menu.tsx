@@ -4,12 +4,12 @@ import MenuItem from "./components/MenuItem";
 
 export default function Menu() {
   const { products } = useLoaderData<{ products: Product[] }>();
-  console.log(products);
+
   return (
     <div>
-      <ul className="grid  gap-2">
+      <ul className="grid gap-2">
         {products.map((p) => (
-          <MenuItem product={p} />
+          <MenuItem product={p} key={p._id}/>
         ))}
       </ul>
     </div>

@@ -4,13 +4,17 @@ import { Nav, NavItem } from "./components/nav";
 
 export default function App() {
   return (
-    <div className="container mx-auto h-screen flex flex-col justify-between">
+    <div className="container mx-auto flex h-dvh flex-col justify-between">
       <div className="overflow-auto p-2">
         <Outlet />
       </div>
       <Nav>
-        <NavItem title="grill" Icon={Beef} to="menu" />
-        <NavItem title="sides" Icon={Salad} />
+        <NavItem title="grill" Icon={Beef} to="menu/682fbbdf73a89bea93bc03ae" />
+        <NavItem
+          title="sides"
+          Icon={Salad}
+          to="menu/682fbd9473a89bea93bc03c7"
+        />
         <NavItem title="drinks" Icon={GlassWater} />
         <NavItem title="services" Icon={HandPlatter} />
         <NavItem title="more" Icon={Menu} />

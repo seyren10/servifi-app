@@ -20,17 +20,18 @@ export const router = createBrowserRouter([
 
           if (token) {
             localStorage.setItem("token", token);
-            return redirect("/menu");
+            return redirect("/menu/682fbbdf73a89bea93bc03ae");
           }
         },
       },
       {
-        path: "menu",
+        path: "menu/:id",
         Component: Menu,
-        loader: async () => {
-          const products = await getProductsByCategory(
-            "68131359f423f44e03b71730"
-          );
+        loader: async ({ params }) => {
+          const { id } = params;
+          if (!id) return;
+
+          const products = await getProductsByCategory(id);
 
           return { products };
         },
