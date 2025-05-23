@@ -1,15 +1,14 @@
 import { createBrowserRouter, redirect } from "react-router";
 import App from "../App";
 import Home from "../Home";
-import { getProductsByCategory } from "../features/products/api";
-import { lazy } from "react";
-
-const Menu = lazy(() => import("../pages/menu/Menu"));
+import { getTableSession } from "../features/tables/api";
+import Loader from "../components/Loader";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: App,
+    HydrateFallback: Loader,
     children: [
       {
         index: true,
@@ -20,20 +19,31 @@ export const router = createBrowserRouter([
 
           if (token) {
             localStorage.setItem("token", token);
+            const table = await getTableSession();
+
+            if (table)
+              localStorage.setItem("table-session", JSON.stringify(table));
+
             return redirect("/menu/682fbbdf73a89bea93bc03ae");
           }
         },
       },
       {
         path: "menu/:id",
-        Component: Menu,
-        loader: async ({ params }) => {
-          const { id } = params;
-          if (!id) return;
+        lazy: async () => {
+          const [{ default: Component }, { productsLoader }] =
+            await Promise.all([
+              import("../pages/menu/Menu"),
+              import("../features/products/loader"),
+            ]);
 
-          const products = await getProductsByCategory(id);
-
-          return { products };
+          return {
+            Component,
+            loader: productsLoader,
+          };
+        },
+        shouldRevalidate: function ({ currentUrl, nextUrl }) {
+          return currentUrl.pathname !== nextUrl.pathname;
         },
       },
     ],
