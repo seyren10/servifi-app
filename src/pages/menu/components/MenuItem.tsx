@@ -1,11 +1,18 @@
 import { ShoppingCart } from "lucide-react";
 import type { Product } from "../../../features/products/type";
+import { useDispatch } from "react-redux";
+import { addPendingOrder } from "../../../features/orders/slice";
 
 type Props = {
   product: Product;
 };
 
 export default function MenuItem({ product }: Props) {
+  const dispatch = useDispatch();
+
+  function handleAddToOrder() {
+    dispatch(addPendingOrder({ product, quantity: 1 }));
+  }
   return (
     <li className="grid grid-cols-[6rem_auto_auto] items-center gap-4 rounded-lg p-2">
       <div className="bg-foreground aspect-square overflow-hidden rounded-md">
@@ -29,7 +36,10 @@ export default function MenuItem({ product }: Props) {
         </p>
       </div>
 
-      <button className="border-primary hover:bg-primary ml-auto rounded-full border p-2 duration-300">
+      <button
+        className="border-primary hover:bg-primary ml-auto rounded-full border p-2 duration-300"
+        onClick={handleAddToOrder}
+      >
         <ShoppingCart className="stroke-primary size-4 hover:stroke-white" />
       </button>
     </li>

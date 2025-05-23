@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <div>
-      <h1 className="text-2xl font-bold text-center">Welcome to Servifi</h1>
+      <h1 className="text-center text-2xl font-bold">Welcome to Servifi</h1>
     </div>
   );
 }

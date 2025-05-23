@@ -1,13 +1,22 @@
 import { Outlet } from "react-router";
-import { Beef, Clipboard, GlassWater, Menu, Salad } from "lucide-react";
+import {
+  Beef,
+  CircleSmall,
+  Clipboard,
+  GlassWater,
+  Menu,
+  Salad,
+} from "lucide-react";
 import { Nav, NavItem } from "./components/nav";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch } from "./store";
 import { useEffect } from "react";
 import { setTableFromLocalStorage } from "./features/tables/slice";
+import { selectHasOrders } from "./features/orders/slice";
 
 export default function App() {
   const dispatch = useDispatch<AppDispatch>();
+  const hasOrders = useSelector(selectHasOrders);
 
   useEffect(() => {
     const table = localStorage.getItem("table-session");
@@ -31,7 +40,12 @@ export default function App() {
           Icon={GlassWater}
           to="menu/68300aa394237aae06484d8f"
         />
-        <NavItem title="orders" Icon={Clipboard} />
+        <div className="relative isolate">
+          <NavItem title="orders" Icon={Clipboard} to="orders" />
+          {hasOrders && (
+            <CircleSmall className="fill-primary absolute -top-1.5 -right-0 size-5" />
+          )}
+        </div>
         <NavItem title="more" Icon={Menu} />
       </Nav>
     </div>

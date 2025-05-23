@@ -3,6 +3,8 @@ import App from "../App";
 import Home from "../Home";
 import { getTableSession } from "../features/tables/api";
 import Loader from "../components/Loader";
+import { orderRoutes } from "./orders";
+import { productRoutes } from "./product";
 
 export const router = createBrowserRouter([
   {
@@ -28,24 +30,8 @@ export const router = createBrowserRouter([
           }
         },
       },
-      {
-        path: "menu/:id",
-        lazy: async () => {
-          const [{ default: Component }, { productsLoader }] =
-            await Promise.all([
-              import("../pages/menu/Menu"),
-              import("../features/products/loader"),
-            ]);
-
-          return {
-            Component,
-            loader: productsLoader,
-          };
-        },
-        shouldRevalidate: function ({ currentUrl, nextUrl }) {
-          return currentUrl.pathname !== nextUrl.pathname;
-        },
-      },
+      productRoutes,
+      orderRoutes,
     ],
   },
 ]);
