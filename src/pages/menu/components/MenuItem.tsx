@@ -32,7 +32,13 @@ export default function MenuItem({ product }: Props) {
         </em>
 
         <p className="text-muted-foreground text-sm font-bold">
-          {product.price ? `P${product.price.toFixed(2)}` : "Free"}
+          {product.price ? (
+            `P${product.price.toFixed(2)}`
+          ) : (
+            <span className="rounded-full bg-lime-200 px-2 py-0.5 text-xs font-normal text-lime-600">
+              free
+            </span>
+          )}
         </p>
       </div>
 

@@ -1,13 +1,28 @@
-import { NavLink, Outlet } from "react-router";
+import { Outlet } from "react-router";
+import { TabsLink, TabsList } from "../../components/tabs";
+import PendingOrderCheckout from "./components/PendingOrderCheckout";
 
 export default function Order() {
   return (
-    <div className="space-y-4">
-      <h1 className="text-lg font-medium">Orders</h1>
+    <div>
+      <div className="sticky top-0 space-y-2 bg-white">
+        <div className="px-4 py-2">
+          <PendingOrderCheckout />
+        </div>
 
-      <NavLink to="">Pending Orders</NavLink>
-      <NavLink to="completed">Completed Orders</NavLink>
-      <Outlet />
+        <TabsList className="">
+          <TabsLink to="" className="grow text-center">
+            Pending Orders
+          </TabsLink>
+          <TabsLink to="completed" className="grow text-center">
+            Completed Orders
+          </TabsLink>
+        </TabsList>
+      </div>
+
+      <section className="p-4">
+        <Outlet />
+      </section>
     </div>
   );
 }

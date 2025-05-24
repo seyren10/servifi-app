@@ -25,7 +25,7 @@ export default function App() {
 
   return (
     <div className="container mx-auto flex h-dvh flex-col justify-between">
-      <div className="overflow-auto p-2">
+      <div className="overflow-auto">
         <Outlet />
       </div>
       <Nav>
