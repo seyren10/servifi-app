@@ -1,31 +1,54 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   selectHasOrders,
   selectTotalPrice,
 } from "../../../features/orders/slice";
-import { selectTable } from "../../../features/tables/slice";
-import { Scroll } from "lucide-react";
 import { Button } from "../../../components/button";
+import type { CreateOrderPayload } from "../../../features/orders/type";
+import { selectTable } from "../../../features/tables/slice";
+import type { RootState } from "../../../store";
+import { useState } from "react";
+import { createOrder } from "../../../features/orders/api";
 
-type Props = {};
-
-export default function PendingOrderCheckout({}: Props) {
-  const table = useSelector(selectTable);
+export default function PendingOrderCheckout() {
+  const [loading, setLoading] = useState(false);
   const hasOrders = useSelector(selectHasOrders);
+  const pendingOrders = useSelector(
+    (state: RootState) => state.orders.pendingOrders,
+  );
+  const table = useSelector(selectTable);
   const totalPrice = useSelector(selectTotalPrice);
 
+  async function handleOrderCheckout() {
+    if (!table) return;
+
+    const payload: CreateOrderPayload = {
+      table: table._id,
+      products: pendingOrders.map((po) => {
+        return {
+          product: po.product._id,
+          quantity: po.quantity,
+        };
+      }),
+    };
+
+    setLoading(true);
+    await createOrder(payload);
+    setLoading(false);
+  }
   return (
     <div className="flex items-center justify-between">
-      <div className="inline-flex items-center gap-2">
-        <Scroll className="stroke-primary" />
-        <div>
-          <h1 className="">Table # {table?.number}</h1>
-          <p className="flex items-center gap-2">
-            <strong> P{totalPrice.toLocaleString('ph')}</strong>
-          </p>
-        </div>
+      <div>
+        <h1 className="text-muted-foreground text-xs">Total Price:</h1>
+        <p className="flex items-center gap-2">
+          <strong> P{totalPrice.toLocaleString("ph")}</strong>
+        </p>
       </div>
-      {hasOrders && <Button>Checkout</Button>}
+      {hasOrders && (
+        <Button onClick={handleOrderCheckout} loading={loading}>
+          Checkout
+        </Button>
+      )}
     </div>
   );
 }

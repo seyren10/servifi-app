@@ -1,13 +1,16 @@
+import { LoaderCircle } from "lucide-react";
 import React from "react";
 
 type Props = React.HtmlHTMLAttributes<HTMLButtonElement> & {
   variant?: "icon";
+  loading?: boolean;
 };
 
 export default function Button({
   variant,
   children,
   className,
+  loading,
   ...props
 }: Props) {
   if (variant === "icon")
@@ -22,9 +25,11 @@ export default function Button({
 
   return (
     <button
+      disabled={loading}
+      className={`bg-primary hover:bg-primary/90 disabled:bg-primary/50 flex h-9 items-center gap-1 rounded-full px-4 py-2 text-sm font-medium text-white ${className}`}
       {...props}
-      className={`bg-primary hover:bg-primary/90 h-9 rounded-full px-4 py-2 text-sm font-medium text-white ${className}`}
     >
+      {loading && <LoaderCircle className="size-4 animate-spin" />}
       {children}
     </button>
   );

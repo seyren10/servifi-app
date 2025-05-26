@@ -1,4 +1,4 @@
-import { Outlet } from "react-router";
+import { Outlet, useNavigation } from "react-router";
 import {
   Beef,
   CircleSmall,
@@ -13,10 +13,13 @@ import type { AppDispatch } from "./store";
 import { useEffect } from "react";
 import { setTableFromLocalStorage } from "./features/tables/slice";
 import { selectHasOrders } from "./features/orders/slice";
+import Loader from "./components/Loader";
+import { Toast } from "./components/toast";
 
 export default function App() {
   const dispatch = useDispatch<AppDispatch>();
   const hasOrders = useSelector(selectHasOrders);
+  const { state } = useNavigation();
 
   useEffect(() => {
     const table = localStorage.getItem("table-session");
@@ -26,8 +29,10 @@ export default function App() {
   return (
     <div className="container mx-auto flex h-dvh flex-col justify-between">
       <div className="overflow-auto">
-        <Outlet />
+        {state === "loading" ? <Loader /> : <Outlet />}
       </div>
+      <Toast />
+
       <Nav>
         <NavItem title="grill" Icon={Beef} to="menu/682fbbdf73a89bea93bc03ae" />
         <NavItem

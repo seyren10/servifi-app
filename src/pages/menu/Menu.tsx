@@ -12,7 +12,7 @@ export default function Menu() {
       {!!table && (
         <div className="mb-4 px-2">
           <h3 className="text-lg font-medium">
-            Currently Serving as Table # {table.number}
+            Currently serving as Table number {table.number}
           </h3>
           <p className="text-muted-foreground text-sm">
             For {table.capacity} persons

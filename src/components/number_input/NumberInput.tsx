@@ -13,7 +13,6 @@ export default function NumberInput({
   onIncrease,
   setValue,
 }: Props) {
-  console.log("numberinput", value);
   function handleIncrease() {
     if (onIncrease) onIncrease();
   }
