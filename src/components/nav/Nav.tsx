@@ -6,9 +6,7 @@ type Props = {
 export default function Nav({ children }: Props) {
   return (
     <nav>
-      <ul className="py-4 px-8  text-white flex gap-4 justify-between">
-        {children}
-      </ul>
+      <ul className="flex justify-between gap-4 px-8 py-4">{children}</ul>
     </nav>
   );
 }

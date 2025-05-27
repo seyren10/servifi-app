@@ -20,6 +20,7 @@ import {
   toastReducer,
   ToastStateContext,
 } from "./components/toast";
+import { Popover, PopoverContent, PopoverTrigger } from "./components/popover";
 
 export default function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -63,7 +64,17 @@ export default function App() {
                 <CircleSmall className="fill-primary absolute -top-1.5 -right-0 size-5" />
               )}
             </div>
-            <NavItem title="more" Icon={Menu} />
+            <Popover>
+              <PopoverTrigger>
+                <NavItem title="menu" Icon={Menu} to="menu" />
+              </PopoverTrigger>
+              <PopoverContent>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Nesciunt ut molestiae illo iusto nam modi assumenda cumque
+                recusandae rerum, expedita nulla cupiditate magnam veritatis
+                nihil officiis, eius sapiente similique dolore?
+              </PopoverContent>
+            </Popover>
           </Nav>
         </div>
       </ToastStateContext.Provider>
