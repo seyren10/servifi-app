@@ -10,7 +10,7 @@ export default function Menu() {
   return (
     <div>
       {!!table && (
-        <div className="mb-4 px-2">
+        <div className="my-4 px-2">
           <h3 className="text-lg font-medium">
             Currently serving as Table number {table.number}
           </h3>

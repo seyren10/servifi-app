@@ -33,11 +33,23 @@ export default function PendingOrderCard({ pendingOrder }: Props) {
   }
   return (
     <li className="flex items-center justify-between">
-      <div>
-        <p className="font-medium">{product.name}</p>
-        <span className="text-muted-foreground text-xs tracking-wider">
-          P{(product.price * quantity).toFixed(2)} @ P{product.price.toFixed(2)}
-        </span>
+      <div className="inline-flex gap-2 items-center">
+        <div className="size-10 overflow-hidden rounded-xl bg-foreground">
+          {product.imageUrl && (
+            <img
+              src={`${import.meta.env.VITE_API_BASE_URL}/${product.imageUrl}`}
+              alt={product.name}
+              className="text-xs"
+            />
+          )}
+        </div>
+        <div>
+          <p className="font-medium">{product.name}</p>
+          <span className="text-muted-foreground text-xs tracking-wider">
+            P{(product.price * quantity).toFixed(2)} @ P
+            {product.price.toFixed(2)}
+          </span>
+        </div>
       </div>
 
       <NumberInput

@@ -4,6 +4,7 @@ import type { RootState } from "../../store";
 
 const initialState: OrderState = {
   pendingOrders: [],
+  totalBill: 0,
 };
 
 export const orderSlice = createSlice({
@@ -21,6 +22,9 @@ export const orderSlice = createSlice({
 
     removePendingOrder: (state, action: PayloadAction<PendingOrder>) => {
       state.pendingOrders = removeOrder(state, action.payload);
+    },
+    clearPendingOrders: (state) => {
+      state.pendingOrders = [];
     },
     decreaseQty: (state, action: PayloadAction<PendingOrder>) => {
       const pendingOrder = findOrder(state, action.payload);
@@ -45,6 +49,9 @@ export const orderSlice = createSlice({
         pendingOrder.quantity = action.payload.quantity;
       }
     },
+    setBill: (state, action: PayloadAction<number>) => {
+      state.totalBill = action.payload;
+    },
   },
 });
 
@@ -54,6 +61,8 @@ export const {
   removePendingOrder,
   increaseQty,
   setQty,
+  clearPendingOrders,
+  setBill,
 } = orderSlice.actions;
 
 export default orderSlice.reducer;
@@ -73,6 +82,10 @@ export const selectTotalPrice = (state: RootState) => {
     (ac, c) => (ac += c.product.price * c.quantity),
     0,
   );
+};
+
+export const selectTotalBill = (state: RootState) => {
+  return state.orders.totalBill;
 };
 
 /* Helpers */

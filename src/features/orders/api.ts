@@ -1,11 +1,22 @@
 import { http } from "../../lib/axios";
-import type { CreateOrderPayload } from "./type";
+import type { OrderSummary, CreateOrderPayload } from "./type";
 
 export const createOrder = async (payload: CreateOrderPayload) => {
   try {
     const res = await http.post("/api/v1/orders", payload);
 
     return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getOrderSummary = async (tableId: string) => {
+  try {
+    const res = await http.get<OrderSummary>(
+      `/api/v1/orders/table/${tableId}/summary`,
+    );
+    return res.data;
   } catch (error) {
     console.log(error);
   }

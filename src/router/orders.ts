@@ -26,13 +26,20 @@ export const orderRoutes: RouteObject = {
     {
       path: "completed",
       lazy: async () => {
-        const [{ default: Component }] = await Promise.all([
-          import("../pages/orders/CompletedOrder"),
-        ]);
+        const [{ default: Component }, { default: loader }] = await Promise.all(
+          [
+            import("../pages/orders/CompletedOrder"),
+            import("../features/orders/loader"),
+          ],
+        );
 
         return {
           Component,
+          loader,
         };
+      },
+      shouldRevalidate: ({ currentUrl, nextUrl }) => {
+        return currentUrl.pathname !== nextUrl.pathname;
       },
     },
   ],

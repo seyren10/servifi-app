@@ -2,6 +2,7 @@ import { ShoppingCart } from "lucide-react";
 import type { Product } from "../../../features/products/type";
 import { useDispatch } from "react-redux";
 import { addPendingOrder } from "../../../features/orders/slice";
+import { useToastDispatch } from "../../../components/toast";
 
 type Props = {
   product: Product;
@@ -9,9 +10,18 @@ type Props = {
 
 export default function MenuItem({ product }: Props) {
   const dispatch = useDispatch();
+  const toast = useToastDispatch();
 
   function handleAddToOrder() {
     dispatch(addPendingOrder({ product, quantity: 1 }));
+    toast({
+      type: "toast/add",
+      payload: {
+        title: "Added to Order",
+        description: `${product.name} has been added to your order.`,
+        type: "success",
+      },
+    });
   }
   return (
     <li className="grid grid-cols-[6rem_auto_auto] items-center gap-4 rounded-lg p-2">

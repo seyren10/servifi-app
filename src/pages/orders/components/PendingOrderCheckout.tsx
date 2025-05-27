@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
+  clearPendingOrders,
   selectHasOrders,
   selectTotalPrice,
 } from "../../../features/orders/slice";
@@ -9,9 +10,12 @@ import { selectTable } from "../../../features/tables/slice";
 import type { RootState } from "../../../store";
 import { useState } from "react";
 import { createOrder } from "../../../features/orders/api";
+import { useToastDispatch } from "../../../components/toast";
 
 export default function PendingOrderCheckout() {
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const toast = useToastDispatch();
   const hasOrders = useSelector(selectHasOrders);
   const pendingOrders = useSelector(
     (state: RootState) => state.orders.pendingOrders,
@@ -35,6 +39,17 @@ export default function PendingOrderCheckout() {
     setLoading(true);
     await createOrder(payload);
     setLoading(false);
+
+    dispatch(clearPendingOrders());
+    toast({
+      type: "toast/add",
+      payload: {
+        type: "success",
+        title: "Order Sent",
+        description: "Your order has been sent to the kitchen.",
+        duration: 5000,
+      },
+    });
   }
   return (
     <div className="flex items-center justify-between">

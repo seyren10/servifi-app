@@ -26,7 +26,7 @@ export default function Button({
   return (
     <button
       disabled={loading}
-      className={`bg-primary hover:bg-primary/90 disabled:bg-primary/50 flex h-9 items-center gap-1 rounded-full px-4 py-2 text-sm font-medium text-white ${className}`}
+      className={`bg-primary hover:bg-primary/90 disabled:bg-primary/50 flex h-9 items-center gap-1 rounded-full px-4 py-2 text-sm font-medium text-white [&_svg]:size-4 ${className}`}
       {...props}
     >
       {loading && <LoaderCircle className="size-4 animate-spin" />}
