@@ -11,7 +11,7 @@ export default function Menu() {
     <div>
       {!!table && (
         <div className="my-4 px-2">
-          <h3 className="text-lg font-medium">
+          <h3 className="text-primary text-lg font-medium">
             Currently serving as Table number {table.number}
           </h3>
           <p className="text-muted-foreground text-sm">

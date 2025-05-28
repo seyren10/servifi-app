@@ -25,13 +25,18 @@ export default function MenuItem({ product }: Props) {
   }
   return (
     <li className="grid grid-cols-[6rem_auto_auto] items-center gap-4 rounded-lg p-2">
-      <div className="bg-foreground aspect-square overflow-hidden rounded-md">
+      <div className="bg-foreground relative isolate aspect-square overflow-hidden rounded-md">
         {product.imageUrl && (
           <img
             src={`${import.meta.env.VITE_API_BASE_URL}/${product.imageUrl}`}
             alt={product.name}
-            className="text-xs"
+            className={`text-xs ${!product.availability && "grayscale"}`}
           />
+        )}
+        {!product.availability && (
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black/50 px-1 text-xs font-medium tracking-wide whitespace-nowrap text-white">
+            Not Available
+          </div>
         )}
       </div>
 
@@ -52,12 +57,14 @@ export default function MenuItem({ product }: Props) {
         </p>
       </div>
 
-      <button
-        className="border-primary hover:bg-primary ml-auto rounded-full border p-2 duration-300"
-        onClick={handleAddToOrder}
-      >
-        <ShoppingCart className="stroke-primary size-4 hover:stroke-white" />
-      </button>
+      {product.availability && (
+        <button
+          className="border-primary hover:bg-primary ml-auto rounded-full border p-2 duration-300"
+          onClick={handleAddToOrder}
+        >
+          <ShoppingCart className="stroke-primary size-4 hover:stroke-white" />
+        </button>
+      )}
     </li>
   );
 }
