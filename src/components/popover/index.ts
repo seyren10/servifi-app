@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 export { default as Popover } from "./Popover";
 export { default as PopoverTrigger } from "./PopoverTrigger";
@@ -21,3 +21,23 @@ export const PopoverContext = createContext<PopoverState | undefined>(
 export const PopoverDispatchContext = createContext<
   PopoverDispatch | undefined
 >(undefined);
+
+export const usePopoverContext = () => {
+  const context = useContext(PopoverContext);
+
+  if (!context)
+    throw new Error("usePopoverContext should be use within PopoverContext");
+
+  return context;
+};
+
+export const usePopoverDispatchContext = () => {
+  const context = useContext(PopoverDispatchContext);
+
+  if (!context)
+    throw new Error(
+      "usePopoverDispatchContext should be use within PopoverDispatchContext",
+    );
+
+  return context;
+};

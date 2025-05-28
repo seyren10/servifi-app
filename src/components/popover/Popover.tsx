@@ -7,10 +7,14 @@ type Props = {
 
 export default function Popover({ children }: Props) {
   const [open, setOpen] = useState(false);
+  const [rect, setRect] = useState<DOMRect>();
+
   return (
-    <PopoverContext.Provider value={{ open }}>
-      <PopoverDispatchContext.Provider value={{ setOpen }}>
-        <div>{children}</div>;
+    <PopoverContext.Provider value={{ open, triggerRect: rect }}>
+      <PopoverDispatchContext.Provider
+        value={{ setOpen, setTriggerRect: setRect }}
+      >
+        <div>{children}</div>
       </PopoverDispatchContext.Provider>
     </PopoverContext.Provider>
   );

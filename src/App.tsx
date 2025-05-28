@@ -1,9 +1,12 @@
-import { Outlet, useNavigation } from "react-router";
+import { Link, Outlet, useNavigation } from "react-router";
 import {
   Beef,
   CircleSmall,
   Clipboard,
+  CreditCard,
+  Flame,
   GlassWater,
+  HandPlatter,
   Menu,
   Salad,
 } from "lucide-react";
@@ -21,6 +24,7 @@ import {
   ToastStateContext,
 } from "./components/toast";
 import { Popover, PopoverContent, PopoverTrigger } from "./components/popover";
+import { Button } from "./components/button";
 
 export default function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -53,6 +57,7 @@ export default function App() {
               Icon={Salad}
               to="menu/682fbd9473a89bea93bc03c7"
             />
+
             <NavItem
               title="drinks"
               Icon={GlassWater}
@@ -66,13 +71,30 @@ export default function App() {
             </div>
             <Popover>
               <PopoverTrigger>
-                <NavItem title="menu" Icon={Menu} to="menu" />
+                <NavItem title="menu" Icon={Menu} />
               </PopoverTrigger>
               <PopoverContent>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Nesciunt ut molestiae illo iusto nam modi assumenda cumque
-                recusandae rerum, expedita nulla cupiditate magnam veritatis
-                nihil officiis, eius sapiente similique dolore?
+                <div className="border-muted rounded-xl border bg-white py-4 text-sm shadow [&_button]:w-full">
+                  <p className="text-muted-foreground mb-2 px-4 text-xs">
+                    Services
+                  </p>
+                  <Button variant="none" className="gap-2">
+                    <HandPlatter /> Call Waiter
+                  </Button>
+                  <Button variant="none" className="gap-2">
+                    <Flame />
+                    Replace Grill Plate
+                  </Button>
+                  <Button variant="none" className="gap-2">
+                    <Flame />
+                    Add Charcoal
+                  </Button>
+                  <Link to="/orders/completed">
+                    <Button variant="none" className="gap-2">
+                      <CreditCard /> Bill Out
+                    </Button>
+                  </Link>
+                </div>
               </PopoverContent>
             </Popover>
           </Nav>

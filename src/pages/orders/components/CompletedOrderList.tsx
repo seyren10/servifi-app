@@ -24,7 +24,7 @@ export function CompletedOrderItem({
 }) {
   const { product, quantity } = orderSummary;
   return (
-    <li className="flex justify-between">
+    <li className="flex justify-between text-sm">
       <p>{product.name}</p>
       <span className="text-muted-foreground text-xs">x {quantity}</span>
     </li>

@@ -17,6 +17,7 @@ export const useElementSize = <T extends HTMLElement>(
       setRect(ref.current.getBoundingClientRect());
     }
   };
+
   useLayoutEffect(() => {
     updateSize();
 
