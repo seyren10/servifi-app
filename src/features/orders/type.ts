@@ -19,11 +19,12 @@ export type CreateOrderPayload = {
 };
 
 export type ProductWithQuantity = {
-  _id: string;
   product: Pick<Product, "_id" | "name">;
   quantity: number;
+  total: number;
 };
 export type OrderSummary = {
+  table: string;
   products: ProductWithQuantity[];
   total: number;
 };

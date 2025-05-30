@@ -71,7 +71,7 @@ export default function App() {
             </div>
             <Popover>
               <PopoverTrigger>
-                <NavItem title="menu" Icon={Menu} />
+                <NavItem title="more" Icon={Menu} />
               </PopoverTrigger>
               <PopoverContent>
                 <div className="border-muted rounded-xl border bg-white py-4 text-sm shadow [&_button]:w-full">

@@ -11,7 +11,7 @@ export default function CompletedOrderList({ orderSummary }: Props) {
   return (
     <ul className="space-y-2">
       {orderSummary.products.map((po) => {
-        return <CompletedOrderItem orderSummary={po} key={po._id} />;
+        return <CompletedOrderItem orderSummary={po} key={po.product._id} />;
       })}
     </ul>
   );
