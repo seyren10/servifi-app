@@ -15,6 +15,7 @@ export default function CompletedOrder() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log(orderSummary)
     if (total) dispatch(setBill(total));
     else dispatch(setBill(0));
   }, [dispatch, total]);

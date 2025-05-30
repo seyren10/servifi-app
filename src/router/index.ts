@@ -5,12 +5,14 @@ import { getTableSession } from "../features/tables/api";
 import Loader from "../components/Loader";
 import { orderRoutes } from "./orders";
 import { productRoutes } from "./product";
+import Error from "../components/Error";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: App,
     HydrateFallback: Loader,
+    ErrorBoundary: Error,
     children: [
       {
         index: true,
