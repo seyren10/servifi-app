@@ -23,7 +23,12 @@ export const router = createBrowserRouter([
 
           if (token) {
             localStorage.setItem("token", token);
-            const table = await getTableSession();
+
+            const table = await getTableSession().catch((err) => {
+              localStorage.removeItem("table-session");
+              localStorage.removeItem("token");
+              throw err;
+            });
 
             if (table)
               localStorage.setItem("table-session", JSON.stringify(table));
