@@ -38,7 +38,7 @@ export function AdminSideNavItem({
         }
         end
       >
-        {Icon && <Icon className="size-5" />}
+        {Icon && <Icon className="size-4" />}
         <span className="hidden font-medium whitespace-nowrap md:inline">
           {children}
         </span>

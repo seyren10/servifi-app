@@ -19,6 +19,8 @@ export const adminRoutes: RouteObject = {
       lazy: {
         Component: async () =>
           (await import("../pages/admin/orders/AdminOrder")).default,
+        loader: async () =>
+          (await import("../features/admin/orders/loader")).default,
       },
     },
   ],
