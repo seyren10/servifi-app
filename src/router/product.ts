@@ -1,5 +1,5 @@
 import type { RouteObject } from "react-router";
-import Loader from "../components/Loader";
+import Loader from "../components/app/Loader";
 
 export const productRoutes: RouteObject = {
   path: "menu/:id",

@@ -1,7 +1,9 @@
+import Brand from "./components/app/Brand";
+
 export default function Home() {
   return (
-    <div>
-      <h1 className="text-center text-2xl font-bold">Welcome to Servifi</h1>
+    <div className="flex h-[20rem] justify-center">
+      <Brand />
     </div>
   );
 }
