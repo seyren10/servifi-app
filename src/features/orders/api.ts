@@ -13,3 +13,9 @@ export const getOrderSummary = async (tableId: string) => {
   );
   return res.data;
 };
+
+export const completeOrder = async (orderId: string) => {
+  const res = await http.patch(`/api/v1/orders/${orderId}/complete`);
+
+  return res.data;
+};

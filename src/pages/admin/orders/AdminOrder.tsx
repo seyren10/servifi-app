@@ -1,7 +1,11 @@
+import { useLoaderData } from "react-router";
 import AdminSectionHeading from "../../../components/app/AdminSectionHeading";
 import OrderCard from "./components/OrderCard";
+import type { Order } from "../../../features/admin/orders/type";
 
 export default function AdminOrder() {
+  const loadedOrders = useLoaderData<Order[]>();
+
   return (
     <div className="space-y-4">
       <AdminSectionHeading
@@ -10,41 +14,12 @@ export default function AdminOrder() {
       />
 
       <div>
-        <OrderCard>
-          <OrderCard.OrderCardItem>
-            Mofo hesoyam bagubix chitty chitty bang bang
-          </OrderCard.OrderCardItem>
-          <OrderCard.OrderCardItem>
-            Mofo hesoyam bagubix chitty chitty bang bang
-          </OrderCard.OrderCardItem>
-          <OrderCard.OrderCardItem>
-            Mofo hesoyam bagubix chitty chitty bang bang
-          </OrderCard.OrderCardItem>
-          <OrderCard.OrderCardItem>
-            Mofo hesoyam bagubix chitty chitty bang bang
-          </OrderCard.OrderCardItem>
-          <OrderCard.OrderCardItem>
-            Mofo hesoyam bagubix chitty chitty bang bang
-          </OrderCard.OrderCardItem>
-          <OrderCard.OrderCardItem>
-            Mofo hesoyam bagubix chitty chitty bang bang
-          </OrderCard.OrderCardItem>
-          <OrderCard.OrderCardItem>
-            Mofo hesoyam bagubix chitty chitty bang bang
-          </OrderCard.OrderCardItem>
-          <OrderCard.OrderCardItem>
-            Mofo hesoyam bagubix chitty chitty bang bang
-          </OrderCard.OrderCardItem>
-          <OrderCard.OrderCardItem>
-            Mofo hesoyam bagubix chitty chitty bang bang
-          </OrderCard.OrderCardItem>
-          <OrderCard.OrderCardItem>
-            Mofo hesoyam bagubix chitty chitty bang bang
-          </OrderCard.OrderCardItem>
-          <OrderCard.OrderCardItem>
-            Mofo hesoyam bagubix chitty chitty bang bang
-          </OrderCard.OrderCardItem>
-        </OrderCard>
+        <OrderCard
+          orders={loadedOrders}
+          renderItem={(order) => (
+            <OrderCard.Item order={order} key={order._id} />
+          )}
+        ></OrderCard>
       </div>
     </div>
   );

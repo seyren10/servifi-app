@@ -1,6 +1,7 @@
 import { type RouteObject } from "react-router";
 import Loader from "../components/app/Loader";
 import Error from "../components/app/Error";
+import { storeHasUser } from "../store";
 
 export const adminRoutes: RouteObject = {
   path: "/admin",
@@ -10,8 +11,8 @@ export const adminRoutes: RouteObject = {
     Component: async () => (await import("../pages/admin/Admin")).default,
     loader: async () => (await import("../features/admin/loader")).default,
   },
-  shouldRevalidate: ({ currentUrl, nextUrl }) => {
-    return currentUrl.pathname !== nextUrl.pathname;
+  shouldRevalidate: () => {
+    return !storeHasUser();
   },
   children: [
     {
@@ -22,6 +23,16 @@ export const adminRoutes: RouteObject = {
         loader: async () =>
           (await import("../features/admin/orders/loader")).default,
       },
+      children: [
+        {
+          path: ":orderId/complete",
+          lazy: {
+            action: async () =>
+              (await import("../features/admin/orders/action"))
+                .completeOrderAction,
+          },
+        },
+      ],
     },
   ],
 };

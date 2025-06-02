@@ -21,7 +21,7 @@ export default function Login({}: Props) {
         {error && <Alert type="error">{error}</Alert>}
 
         <fetcher.Form className="mt-4 space-y-4" action="" method="post">
-          <Input name="email" type="email" placeholder="email" label="Email" />
+          <Input name="email" type="email" placeholder="juan@delacruz.com" label="Email" />
           <Input name="password" type="password" label="password" />
 
           <Button type="submit" className="w-full" loading={busy}>

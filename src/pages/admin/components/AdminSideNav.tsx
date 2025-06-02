@@ -13,7 +13,7 @@ export default function AdminSideNav({ children }: Props) {
 
 export function AdminSideNavList({ children }: { children: ReactNode }) {
   return (
-    <ul className="flex flex-col items-center gap-4 md:items-start">
+    <ul className="flex flex-col items-center gap-4 md:w-[12rem] md:items-start">
       {children}
     </ul>
   );

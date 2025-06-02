@@ -1,5 +1,5 @@
 import type { User } from "./auth/type";
 
-export type AdminStateContext = {
+export type UserState = {
   user: User | null;
 };
