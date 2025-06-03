@@ -2,6 +2,7 @@ import { LoaderCircle } from "lucide-react";
 import React, { useContext } from "react";
 import { PopoverDispatchContext } from "../popover";
 import type { SizeType, VariantType } from "../../types";
+import { twMerge } from "tailwind-merge";
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: VariantType;
@@ -55,8 +56,11 @@ export default function Button({
     return (
       <button
         onClick={handleClick}
+        className={twMerge(
+          `border-primary [&>svg]:stroke-primary cursor-pointer rounded-full border p-1 [&>svg]:size-4 ${loading && "[&_svg:not([role=progressbar])]:hidden"}`,
+          className,
+        )}
         {...props}
-        className={`border-primary [&>svg]:stroke-primary cursor-pointer rounded-full border p-1 [&>svg]:size-4 ${loading && "[&_svg:not([role=progressbar])]:hidden"} ${className}`}
       >
         {loading && (
           <LoaderCircle className="size-4 animate-spin" role="progressbar" />
@@ -68,7 +72,10 @@ export default function Button({
   return (
     <button
       disabled={loading}
-      className={`${getVariantClass(variant)} ${loading && "[&_svg:not([role=progressbar])]:hidden"} disabled:bg-primary/50 flex cursor-pointer items-center justify-center gap-1 rounded-full font-medium [&_svg]:size-4 ${getSizeClass(size)} ${className}`}
+      className={twMerge(
+        `${getVariantClass(variant)} ${loading && "[&_svg:not([role=progressbar])]:hidden"} disabled:bg-primary/50 flex cursor-pointer items-center justify-center gap-1 rounded-full font-medium [&_svg]:size-4 ${getSizeClass(size)}`,
+        className,
+      )}
       onClick={handleClick}
       {...props}
     >

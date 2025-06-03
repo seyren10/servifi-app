@@ -12,3 +12,9 @@ export const billOutTable = async (tableId: string) => {
 
   return res.data;
 };
+
+export const getTables = async () => {
+  const res = await http.get<Table[]>("/api/v1/tables");
+
+  return res.data;
+};

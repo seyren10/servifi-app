@@ -8,12 +8,19 @@
     --color-primary: var(--color-indigo-500);
     --color-secondary: var(--color-gray-500);
     --color-foreground: var(--color-indigo-100);
-    --color-muted: var(--color-gray-100);
+    --color-muted: var(--color-gray-200);
     --color-muted-foreground: var(--color-gray-500);
     --color-info: var(--color-primary);
     --color-success: var(--color-primary);
     --color-warning: var(--color-amber-500);
     --color-error: var(--color-rose-500);
+    --color-border: var(--color-gray-200)
+}
+
+@layer base {
+    * {
+        @apply border-muted
+    }
 }
 
 .semantic-border-info,

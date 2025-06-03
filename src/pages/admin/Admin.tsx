@@ -2,9 +2,10 @@ import { Outlet, useLoaderData } from "react-router";
 import type { User } from "../../features/admin/auth/type";
 import {
   Clipboard,
-  Columns3,
   HandPlatter,
+  LayoutDashboard,
   LineChart,
+  Square,
   Utensils,
 } from "lucide-react";
 import AdminSideNav, {
@@ -41,8 +42,11 @@ export default function Admin() {
               <Brand />
               <div role="separator" className="bg-foreground h-px"></div>
               <AdminSideNavList>
-                <AdminSideNavItem Icon={Columns3} to="">
+                <AdminSideNavItem Icon={LayoutDashboard} to="">
                   Dashboard
+                </AdminSideNavItem>
+                <AdminSideNavItem Icon={Square} to="./tables">
+                  Table Management
                 </AdminSideNavItem>
                 <AdminSideNavItem Icon={Clipboard} to="./orders">
                   Orders

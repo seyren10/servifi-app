@@ -34,6 +34,14 @@ export const adminRoutes: RouteObject = {
         },
       ],
     },
+    {
+      path: "tables",
+      lazy: {
+        Component: async () =>
+          (await import("../pages/admin/tables/AdminTable")).default,
+        loader: async () => (await import("../features/tables/loader")).default,
+      },
+    },
   ],
 };
 

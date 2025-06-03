@@ -2,7 +2,7 @@ export type Table = {
   _id: string;
   number: number;
   capacity: number;
-  status: "occupied" | "available" | "reserved";
+  status: TableStatus;
   createdAt: string;
   updatedAt: string;
 };
@@ -10,3 +10,5 @@ export type Table = {
 export type TableState = {
   table: Table | null;
 };
+
+export type TableStatus = "occupied" | "available" | "reserved";
