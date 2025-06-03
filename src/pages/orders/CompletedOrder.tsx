@@ -18,7 +18,6 @@ export default function CompletedOrder() {
     url: import.meta.env.VITE_API_BASE_URL,
   });
   const revalidator = useRevalidator();
-
   const dispatch = useDispatch();
 
   useEffect(() => {

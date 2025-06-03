@@ -6,6 +6,7 @@
 
 @theme {
     --color-primary: var(--color-indigo-500);
+    --color-secondary: var(--color-gray-500);
     --color-foreground: var(--color-indigo-100);
     --color-muted: var(--color-gray-100);
     --color-muted-foreground: var(--color-gray-500);

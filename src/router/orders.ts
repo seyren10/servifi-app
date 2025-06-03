@@ -25,18 +25,11 @@ export const orderRoutes: RouteObject = {
     },
     {
       path: "completed",
-      lazy: async () => {
-        const [{ default: Component }, { default: loader }] = await Promise.all(
-          [
-            import("../pages/orders/CompletedOrder"),
-            import("../features/orders/loader"),
-          ],
-        );
-
-        return {
-          Component,
-          loader,
-        };
+      lazy: {
+        Component: async () =>
+          (await import("../pages/orders/CompletedOrder")).default,
+        loader: async () => (await import("../features/orders/loader")).default,
+        action: async () => (await import("../features/orders/action")).default,
       },
     },
   ],
