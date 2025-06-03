@@ -38,9 +38,6 @@ export const orderRoutes: RouteObject = {
           loader,
         };
       },
-      shouldRevalidate: ({ currentUrl, nextUrl }) => {
-        return currentUrl.pathname !== nextUrl.pathname;
-      },
     },
   ],
 };
