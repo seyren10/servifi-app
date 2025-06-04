@@ -11,6 +11,7 @@ import type { RootState } from "../../../store";
 import { useState } from "react";
 import { createOrder } from "../../../features/orders/api";
 import { useToastDispatch } from "../../../components/toast";
+import { LoaderCircle } from "lucide-react";
 
 export default function PendingOrderCheckout() {
   const [loading, setLoading] = useState(false);
@@ -60,7 +61,8 @@ export default function PendingOrderCheckout() {
         </p>
       </div>
       {hasOrders && (
-        <Button onClick={handleOrderCheckout} loading={loading}>
+        <Button onClick={handleOrderCheckout}>
+          {loading && <LoaderCircle className="animate-spin" />}
           Checkout
         </Button>
       )}

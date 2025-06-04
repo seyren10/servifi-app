@@ -41,6 +41,44 @@ export const adminRoutes: RouteObject = {
           (await import("../pages/admin/tables/AdminTable")).default,
         loader: async () => (await import("../features/tables/loader")).default,
       },
+      children: [
+        {
+          path: ":id",
+          children: [
+            {
+              path: "generate-session",
+              lazy: {
+                Component: async () =>
+                  (await import("../pages/admin/tables/GenerateSession"))
+                    .default,
+                action: async () =>
+                  (await import("../features/tables/action")).default,
+              },
+            },
+            {
+              path: "edit",
+              lazy: {
+                Component: async () =>
+                  (await import("../pages/admin/tables/Edit")).default,
+                loader: async () =>
+                  (await import("../features/tables/loader")).getTable,
+                action: async () =>
+                  (await import("../features/tables/action")).upsertTable,
+              },
+            },
+          ],
+        },
+        {
+          path: "create",
+          lazy: {
+            Component: async () =>
+              (await import("../pages/admin/tables/Create")).default,
+            action: async () =>
+              (await import("../features/tables/action")).upsertTable,
+          },
+        },
+        {},
+      ],
     },
   ],
 };

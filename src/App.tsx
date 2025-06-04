@@ -80,19 +80,19 @@ export default function App() {
                     <p className="text-muted-foreground mb-2 px-4 text-xs">
                       Services
                     </p>
-                    <Button variant="none" className="justify-start gap-2">
+                    <Button className="justify-start gap-2">
                       <HandPlatter /> Call Waiter
                     </Button>
-                    <Button variant="none" className="justify-start gap-2">
+                    <Button className="justify-start gap-2">
                       <Flame />
                       Replace Grill Plate
                     </Button>
-                    <Button variant="none" className="justify-start gap-2">
+                    <Button className="justify-start gap-2">
                       <Flame />
                       Add Charcoal
                     </Button>
                     <Link to="/orders/completed">
-                      <Button variant="none" className="justify-start gap-2">
+                      <Button className="justify-start gap-2">
                         <CreditCard /> Bill Out
                       </Button>
                     </Link>

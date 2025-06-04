@@ -64,7 +64,7 @@ export default function Admin() {
             </AdminSideNav>
 
             <main className="h-full overflow-y-auto">
-              <section className="container mx-auto mt-10">
+              <section className="container mx-auto mt-10 p-4">
                 <Outlet />
               </section>
             </main>

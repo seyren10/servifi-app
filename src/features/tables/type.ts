@@ -12,3 +12,8 @@ export type TableState = {
 };
 
 export type TableStatus = "occupied" | "available" | "reserved";
+
+export type TablePayload = {
+  number: number;
+  capacity: number;
+};

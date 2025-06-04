@@ -2,7 +2,7 @@ import { type ReactNode } from "react";
 import type { Order } from "../../../../features/admin/orders/type";
 import { Image } from "../../../../components/image";
 import { Button } from "../../../../components/button";
-import { Check } from "lucide-react";
+import { Check, LoaderCircle } from "lucide-react";
 
 import { useFetcher } from "react-router";
 
@@ -32,8 +32,6 @@ function OrderCardItem({ order }: OrderCardItemProps) {
       action: `${order._id}/complete`,
       method: "patch",
     });
-
-
   };
 
   return (
@@ -42,7 +40,8 @@ function OrderCardItem({ order }: OrderCardItemProps) {
         <h3 className="font-medium uppercase">
           TABLE # <span className="text-primary">{order.table.number}</span>
         </h3>
-        <Button size="sm" onClick={handleOrderCompleted} loading={loading}>
+        <Button size="sm" onClick={handleOrderCompleted}>
+          {loading && <LoaderCircle className="animate-spin" />}
           <Check /> Complete
         </Button>
       </div>

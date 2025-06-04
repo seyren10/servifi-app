@@ -24,7 +24,7 @@ export default function NumberInput({
   return (
     <div className="flex items-center gap-1">
       <Button
-        variant="icon"
+        size="icon"
         onClick={handleDecrease}
         aria-label="Decrease quantity"
       >
@@ -38,7 +38,7 @@ export default function NumberInput({
         className="appearance-['text-field'] no-spinner max-w-10 pl-1 text-center"
       />
       <Button
-        variant="icon"
+        size="icon"
         onClick={handleIncrease}
         aria-label="Increase quantity"
       >

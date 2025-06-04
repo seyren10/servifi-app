@@ -2,6 +2,8 @@ import { useFetcher } from "react-router";
 import { Button } from "../../components/button";
 import { Alert } from "../../components/alert";
 import { Input } from "../../components/input";
+import { Label } from "../../components/label";
+import { LoaderCircle } from "lucide-react";
 
 type Props = {};
 
@@ -21,10 +23,24 @@ export default function Login({}: Props) {
         {error && <Alert type="error">{error}</Alert>}
 
         <fetcher.Form className="mt-4 space-y-4" action="" method="post">
-          <Input name="email" type="email" placeholder="juan@delacruz.com" label="Email" />
-          <Input name="password" type="password" label="password" />
+          <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="juan@delacruz.com"
+              autoComplete="email"
+            />
+          </div>
 
-          <Button type="submit" className="w-full" loading={busy}>
+          <div className="space-y-2">
+            <Label htmlFor="password">Password</Label>
+            <Input id="password" name="password" type="password" />
+          </div>
+
+          <Button type="submit" className="w-full">
+            {busy && <LoaderCircle className="animate-spin" />}
             Login
           </Button>
         </fetcher.Form>

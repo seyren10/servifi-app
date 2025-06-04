@@ -1,5 +1,5 @@
 import { http } from "../../lib/axios";
-import type { Table } from "./type";
+import type { Table, TablePayload } from "./type";
 
 export async function getTableSession() {
   const res = await http.get<Table>("/api/v1/tables/get-session");
@@ -15,6 +15,35 @@ export const billOutTable = async (tableId: string) => {
 
 export const getTables = async () => {
   const res = await http.get<Table[]>("/api/v1/tables");
+
+  return res.data;
+};
+
+export const getTable = async (tableId: string) => {
+  const res = await http.get<Table>(`/api/v1/tables/${tableId}`);
+
+  return res.data;
+};
+
+export const generateSession = async (tableId: string) => {
+  const res = await http.post<{ url: string }>(
+    `/api/v1/tables/${tableId}/generate-session`,
+  );
+  return res.data.url;
+};
+
+export const createTable = async (payload: TablePayload) => {
+  const res = await http.post("/api/v1/tables", payload);
+  return res.data;
+};
+
+export const updateTable = async (tableId: string, payload: TablePayload) => {
+  const res = await http.put(`/api/v1/tables/${tableId}`, payload);
+  return res.data;
+};
+
+export const deleteTable = async (tableId: string) => {
+  const res = await http.delete(`/api/v1/tables/${tableId}`);
 
   return res.data;
 };

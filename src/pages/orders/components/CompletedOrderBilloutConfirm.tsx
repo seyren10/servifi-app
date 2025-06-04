@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
 import { Button } from "../../../components/button";
-import { CheckSquare, X } from "lucide-react";
+import { CheckSquare, LoaderCircle, X } from "lucide-react";
 import { useFetcher, useNavigate } from "react-router";
 import { useToastDispatch } from "../../../components/toast";
 import { useDispatch } from "react-redux";
@@ -40,12 +40,13 @@ export default function CompletedOrderBilloutConfirm({ onClose }: Props) {
   return createPortal(
     <div className="absolute inset-0 grid place-content-center bg-white">
       <Button
-        variant="icon"
+        size="icon"
+        variant="link"
         className="absolute top-2 right-2 !p-2"
         onClick={() => onClose?.()}
-        loading={loading}
         aria-label="Close"
       >
+        {loading && <LoaderCircle className="animate-spin" />}
         <X />
       </Button>
 
@@ -53,14 +54,11 @@ export default function CompletedOrderBilloutConfirm({ onClose }: Props) {
         <CheckSquare className="stroke-primary mx-auto" />
         <h3 className="font-medium">Please confirm to proceed billing out.</h3>
         <div className="grid space-y-2">
-          <Button onClick={handleConfirm} loading={loading}>
+          <Button onClick={handleConfirm}>
+            {loading && <LoaderCircle className="animate-spin" />}
             Confirm
           </Button>
-          <Button
-            variant="secondary"
-            onClick={() => onClose?.()}
-            loading={loading}
-          >
+          <Button variant="secondary" onClick={() => onClose?.()}>
             I'd like to order more
           </Button>
         </div>
