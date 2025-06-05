@@ -19,9 +19,9 @@ export const columns: ColumnDef<Table>[] = [
     cell: ({ getValue }) => {
       const tableStatus = getValue() as TableStatus;
       return (
-        <div className="flex w-fit items-center gap-2 rounded-full px-2">
+        <div className="bg-foreground flex w-fit items-center gap-2 rounded-full px-2">
           <TableIcon type={tableStatus} />
-          <span>{tableStatus}</span>
+          <span className="capitalize">{tableStatus}</span>
         </div>
       );
     },

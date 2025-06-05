@@ -66,6 +66,20 @@ export const adminRoutes: RouteObject = {
                   (await import("../features/tables/action")).upsertTable,
               },
             },
+            {
+              path: "delete",
+              lazy: {
+                action: async () =>
+                  (await import("../features/tables/action")).deleteTable,
+              },
+            },
+            {
+              path: "bill-out",
+              lazy: {
+                action: async () =>
+                  (await import("../features/tables/action")).billOut,
+              },
+            },
           ],
         },
         {
@@ -77,7 +91,15 @@ export const adminRoutes: RouteObject = {
               (await import("../features/tables/action")).upsertTable,
           },
         },
-        {},
+        {
+          path: "reprint-session",
+          lazy: {
+            Component: async () =>
+              (await import("../pages/admin/tables/ReprintSession")).default,
+            loader: async () =>
+              (await import("../features/tables/loader")).getCurrentSession,
+          },
+        },
       ],
     },
   ],

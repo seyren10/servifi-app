@@ -20,7 +20,7 @@ export default function CompletedOrderBilloutConfirm({ onClose }: Props) {
   const handleConfirm = async () => {
     await fetcher.submit(null, {
       action: "/orders/completed",
-      method: "POST",
+      method: "DELETE",
     });
 
     dispatch(resetStore());

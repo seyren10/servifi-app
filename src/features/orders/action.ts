@@ -1,4 +1,4 @@
-import { billOutTable } from "../tables/api";
+import { requestBillOutTable } from "../tables/api";
 import type { Table } from "../tables/type";
 
 export default async () => {
@@ -10,7 +10,7 @@ export default async () => {
     throw new Error("Table not found");
   }
 
-  const res = await billOutTable(table._id);
+  const res = await requestBillOutTable(table._id);
   //clear local storage
   localStorage.clear();
 

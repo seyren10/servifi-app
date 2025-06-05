@@ -8,9 +8,11 @@ import {
   createTable as createTableApi,
   updateTable as updateTableApi,
   deleteTable as deleteTableApi,
+  billoutTable,
 } from "./api";
 import type { AxiosError } from "axios";
 import type { ActionResponse } from "../../types";
+import type { TableBillOutParams } from "./type";
 
 export default async ({ params }: LoaderFunctionArgs) => {
   const { id } = params;
@@ -62,6 +64,23 @@ export const deleteTable = async ({ params }: ActionFunctionArgs) => {
   if (!tableId) throw new Error("No table id found in params");
 
   const res = await deleteTableApi(tableId);
+
+  return res;
+};
+
+export const billOut = async ({ params, request }: ActionFunctionArgs) => {
+  const { id: tableId } = params;
+  if (!tableId) throw new Error("No table id found in params");
+
+  const formData = await request.formData();
+  const includeRecord = formData.get("includeRecord")?.toString() === "true";
+  const queryParams: Partial<TableBillOutParams> = {};
+
+  if (!includeRecord) {
+    queryParams.norecord = true;
+  }
+
+  const res = await billoutTable(tableId, queryParams);
 
   return res;
 };

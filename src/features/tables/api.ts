@@ -1,5 +1,5 @@
 import { http } from "../../lib/axios";
-import type { Table, TablePayload } from "./type";
+import type { TableBillOutParams, Table, TablePayload } from "./type";
 
 export async function getTableSession() {
   const res = await http.get<Table>("/api/v1/tables/get-session");
@@ -7,8 +7,19 @@ export async function getTableSession() {
   return res.data;
 }
 
-export const billOutTable = async (tableId: string) => {
-  const res = await http.post(`/api/v1/tables/${tableId}/bill-out`);
+export const requestBillOutTable = async (tableId: string) => {
+  const res = await http.patch(`/api/v1/tables/${tableId}/request-bill-out`);
+
+  return res.data;
+};
+
+export const billoutTable = async (
+  tableId: string,
+  params?: Partial<TableBillOutParams>,
+) => {
+  const res = await http.delete(`/api/v1/tables/${tableId}/bill-out`, {
+    params,
+  });
 
   return res.data;
 };
