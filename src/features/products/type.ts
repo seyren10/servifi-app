@@ -1,8 +1,10 @@
+import type { Category } from "../category/type";
+
 export type Product = {
   _id: string;
   name: string;
   description?: string;
-  category: string;
+  category: string | Category;
   price: number;
   imageUrl?: string;
   availability: boolean;

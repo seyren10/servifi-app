@@ -25,6 +25,14 @@ import {
 } from "./components/toast";
 import { Popover, PopoverContent, PopoverTrigger } from "./components/popover";
 import { Button } from "./components/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "./components/dropdown-menu";
 
 export default function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -71,34 +79,34 @@ export default function App() {
                   <CircleSmall className="fill-primary absolute -top-1.5 -right-0 size-5" />
                 )}
               </div>
-              <Popover>
-                <PopoverTrigger>
+              <DropdownMenu>
+                <DropdownMenuTrigger>
                   <NavItem title="more" Icon={Menu} />
-                </PopoverTrigger>
-                <PopoverContent>
-                  <div className="border-muted rounded-xl border bg-white py-4 text-sm shadow [&_button]:w-full">
-                    <p className="text-muted-foreground mb-2 px-4 text-xs">
-                      Services
-                    </p>
-                    <Button className="justify-start gap-2">
-                      <HandPlatter /> Call Waiter
-                    </Button>
-                    <Button className="justify-start gap-2">
-                      <Flame />
-                      Replace Grill Plate
-                    </Button>
-                    <Button className="justify-start gap-2">
-                      <Flame />
-                      Add Charcoal
-                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="rounded-xl">
+                  <DropdownMenuLabel>Services</DropdownMenuLabel>
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem>
+                      <HandPlatter />
+                      Call Waiter
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+
+                  <DropdownMenuItem>
+                    <Flame />
+                    Replace Grill Plate
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Flame />
+                    Add Charcoal
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
                     <Link to="/orders/completed">
-                      <Button className="justify-start gap-2">
-                        <CreditCard /> Bill Out
-                      </Button>
+                      <CreditCard /> Bill Out
                     </Link>
-                  </div>
-                </PopoverContent>
-              </Popover>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </Nav>
           )}
         </div>

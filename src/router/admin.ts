@@ -102,6 +102,16 @@ export const adminRoutes: RouteObject = {
         },
       ],
     },
+    {
+      path: "menu-management",
+      lazy: {
+        Component: async () =>
+          (await import("../pages/admin/menu-management/MenuManagement"))
+            .default,
+        loader: async () =>
+          (await import("../features/products/loader")).adminProductsLoader,
+      },
+    },
   ],
 };
 

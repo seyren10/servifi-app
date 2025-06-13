@@ -20,7 +20,8 @@
     --color-error: var(--color-rose-500);
     --color-border: var(--color-gray-200);
     --color-destructive: var(--color-error);
-    --color-input: var(--color-gray-100)
+    --color-input: var(--color-gray-100);
+    --color-popover: white;
 }
 
 @layer base {

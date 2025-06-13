@@ -17,10 +17,12 @@ export default function Image({
 
   return (
     <div
-      className={`bg-foreground relative isolate aspect-${aspect} overflow-hidden rounded-md`}
+      className={`bg-foreground relative isolate aspect-${aspect} overflow-hidden rounded-md ${props.className}`}
     >
       <figure ref={ref}>
-        {entry?.isIntersecting && src && <img src={src} {...props} />}
+        {entry?.isIntersecting && src && (
+          <img src={src} {...props} className="h-full w-full" />
+        )}
         {children}
       </figure>
     </div>

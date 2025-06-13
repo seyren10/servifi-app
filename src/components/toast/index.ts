@@ -27,7 +27,7 @@ export const toastReducer = (
         ...state,
         toasts: [
           ...state.toasts,
-          { ...action.payload, id: crypto.randomUUID() },
+          { ...action.payload, id: Math.random().toString() },
         ],
       };
     case "toast/remove": {
