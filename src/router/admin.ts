@@ -111,6 +111,19 @@ export const adminRoutes: RouteObject = {
         loader: async () =>
           (await import("../features/products/loader")).adminProductsLoader,
       },
+      children: [
+        {
+          path: "create",
+          lazy: {
+            Component: async () =>
+              (await import("../pages/admin/menu-management/Create")).default,
+            loader: async () =>
+              (await import("../features/products/loader")).getCategories,
+            action: async () =>
+              (await import("../features/products/action")).default,
+          },
+        },
+      ],
     },
   ],
 };

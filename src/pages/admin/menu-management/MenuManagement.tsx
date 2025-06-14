@@ -1,12 +1,16 @@
-import { useLoaderData } from "react-router";
+import { Link, Outlet, useLoaderData, useMatch } from "react-router";
 import AdminSectionHeading from "../../../components/app/AdminSectionHeading";
 import { DataTable } from "../../../components/app/DataTable";
 import type { Product } from "../../../features/products/type";
 import { productColumns } from "./columns";
 import { Button } from "../../../components/button";
+import { Plus } from "lucide-react";
 
 export default function MenuManagement() {
   const products = useLoaderData<Product[]>();
+  const match = useMatch("/admin/menu-management");
+
+  if (!match) return <Outlet />;
 
   return (
     <div className="space-y-4">
@@ -15,8 +19,13 @@ export default function MenuManagement() {
         description="CRUD menu and category"
       ></AdminSectionHeading>
 
-      <section className="rounded-xl border p-4 shadow-sm space-y-4">
-        <Button>Add Product</Button>
+      <section className="space-y-4 rounded-xl border p-4 shadow-sm">
+        <Button asChild>
+          <Link to="create">
+            <Plus />
+            New Product
+          </Link>
+        </Button>
         <DataTable
           data={products}
           columns={productColumns}

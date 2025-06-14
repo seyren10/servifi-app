@@ -11,3 +11,10 @@ export type Product = {
   updatedAt: string;
   createdAt: string;
 };
+
+export type CreateProductPayload = Pick<
+  Product,
+  "name" | "price" | "description" | "category" | "availability"
+> & {
+  image?: File;
+};
