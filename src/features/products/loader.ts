@@ -1,5 +1,9 @@
 import type { LoaderFunctionArgs } from "react-router";
-import { getProducts, getProductsByCategoryId } from "./api";
+import {
+  getProducts,
+  getProductsByCategoryId,
+  getProduct as getProductApi,
+} from "./api";
 import { getCategories as getCategoriesApi } from "../category/api";
 
 export async function productsLoader(args: LoaderFunctionArgs) {
@@ -10,6 +14,16 @@ export async function productsLoader(args: LoaderFunctionArgs) {
 
   return { products };
 }
+
+export const getProduct = async (args: LoaderFunctionArgs) => {
+  const { productId } = args.params;
+
+  if (!productId) return;
+
+  const product = await getProductApi(productId);
+
+  return product;
+};
 
 export const adminProductsLoader = async () => {
   const products = await getProducts();

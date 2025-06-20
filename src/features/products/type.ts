@@ -18,3 +18,5 @@ export type CreateProductPayload = Pick<
 > & {
   image?: File;
 };
+
+export type UpdateProductPayload = Partial<CreateProductPayload>;
