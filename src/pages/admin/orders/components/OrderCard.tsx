@@ -5,6 +5,7 @@ import { Button } from "../../../../components/button";
 import { Check, LoaderCircle } from "lucide-react";
 
 import { useFetcher } from "react-router";
+import { cloudinary } from "../../../../services/cloudinary/cloudinary";
 
 type Props = {
   orders: Order[];
@@ -56,7 +57,7 @@ function OrderCardItem({ order }: OrderCardItemProps) {
           >
             <div className="size-10">
               <Image
-                src={`${import.meta.env.VITE_API_BASE_URL}/${product.product.imageUrl}`}
+                src={cloudinary.image(product.product.imageUrl).toURL()}
                 alt={product.product.name}
               />
             </div>

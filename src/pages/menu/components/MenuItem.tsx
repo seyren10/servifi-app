@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { addPendingOrder } from "../../../features/orders/slice";
 import { useToastDispatch } from "../../../components/toast";
 import { Image } from "../../../components/image";
+import { cloudinary } from "../../../services/cloudinary/cloudinary";
 
 type Props = {
   product: Product;
@@ -12,6 +13,7 @@ type Props = {
 export default function MenuItem({ product }: Props) {
   const dispatch = useDispatch();
   const toast = useToastDispatch();
+  const imageUrl = cloudinary.image(product.imageUrl).toURL();
 
   function handleAddToOrder() {
     dispatch(addPendingOrder({ product, quantity: 1 }));
@@ -27,7 +29,7 @@ export default function MenuItem({ product }: Props) {
   return (
     <li className="grid grid-cols-[6rem_auto_auto] items-center gap-4 rounded-lg p-2">
       <Image
-        src={`${import.meta.env.VITE_API_BASE_URL}/${product.imageUrl}`}
+        src={imageUrl}
         alt={product.name}
         className={`text-xs ${!product.availability && "grayscale"}`}
       >

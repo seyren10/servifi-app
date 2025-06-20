@@ -7,6 +7,7 @@ import {
   setQty,
 } from "../../../features/orders/slice";
 import { Image } from "../../../components/image";
+import { cloudinary } from "../../../services/cloudinary/cloudinary";
 
 type Props = {
   pendingOrder: PendingOrder;
@@ -15,6 +16,7 @@ type Props = {
 export default function PendingOrderCard({ pendingOrder }: Props) {
   const dispatch = useDispatch();
   const { product, quantity } = pendingOrder;
+  const imageUrl = cloudinary.image(product.imageUrl).toURL();
 
   function handleIncrease() {
     dispatch(increaseQty(pendingOrder));
@@ -35,11 +37,7 @@ export default function PendingOrderCard({ pendingOrder }: Props) {
   return (
     <li className="flex items-center justify-between">
       <div className="inline-flex items-center gap-2">
-        <Image
-          src={`${import.meta.env.VITE_API_BASE_URL}/${product.imageUrl}`}
-          alt={product.name}
-          className="size-10"
-        ></Image>
+        <Image src={imageUrl} alt={product.name} className="size-10"></Image>
         <div>
           <p className="font-medium">{product.name}</p>
           <span className="text-muted-foreground text-xs tracking-wider">
