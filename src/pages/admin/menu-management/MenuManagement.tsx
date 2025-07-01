@@ -1,37 +1,22 @@
-import { Link, Outlet, useLoaderData, useMatch } from "react-router";
-import AdminSectionHeading from "../../../components/app/AdminSectionHeading";
-import { DataTable } from "../../../components/app/DataTable";
-import type { Product } from "../../../features/products/type";
-import { productColumns } from "./columns";
-import { Button } from "../../../components/button";
-import { Plus } from "lucide-react";
+import { Navigate, Outlet } from "react-router";
+import { TabsLink, TabsList } from "../../../components/tabs";
 
 export default function MenuManagement() {
-  const products = useLoaderData<Product[]>();
-  const match = useMatch("/admin/menu-management");
-
-  if (!match) return <Outlet />;
-
   return (
     <div className="space-y-4">
-      <AdminSectionHeading
-        title="Menu Management"
-        description="CRUD menu and category"
-      ></AdminSectionHeading>
+      <TabsList >
+        <TabsLink to="products">Products</TabsLink>
+        <TabsLink to="categories">Categories</TabsLink>
+        <TabsLink to="promos">Promos</TabsLink>
+      </TabsList>
 
-      <section className="space-y-4 rounded-xl border p-4 shadow-sm">
-        <Button asChild>
-          <Link to="create">
-            <Plus />
-            New Product
-          </Link>
-        </Button>
-        <DataTable
-          data={products}
-          columns={productColumns}
-          filterPlaceholder="Search products..."
-        />
+      <section>
+        <Outlet />
       </section>
     </div>
   );
+}
+
+export function RedirectToProduct() {
+  return <Navigate to="products" />;
 }

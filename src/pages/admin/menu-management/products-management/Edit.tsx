@@ -1,17 +1,18 @@
-import type { Category } from "../../../features/category/type";
 import type { z } from "zod";
-import type { Product } from "../../../features/products/type";
-import AdminSectionHeading from "../../../components/app/AdminSectionHeading";
+import type { Category } from "../../../../features/category/type";
+import type { Product } from "../../../../features/products/type";
+import AdminSectionHeading from "../../../../components/app/AdminSectionHeading";
 import ProductForm, { productSchema } from "./components/ProductForm";
-import { useFetcher, useLoaderData } from "react-router";
+import { useFetcher, useLoaderData, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
-import { getCategories } from "../../../features/category/api";
-import { Button } from "../../../components/button";
+import { getCategories } from "../../../../features/category/api";
+import { Button } from "../../../../components/button";
+import { useKeyPress } from "../../../../hooks/useKeyPress";
 
 export default function Edit() {
   const product = useLoaderData<Product>();
   const [categories, setCategories] = useState<Category[]>();
-
+  const navigate = useNavigate();
   const fetcher = useFetcher();
 
   const onSubmit = (values: z.infer<typeof productSchema>) => {
@@ -29,6 +30,11 @@ export default function Edit() {
       encType: "multipart/form-data",
     });
   };
+
+  const goBack = () => {
+    navigate(-1);
+  };
+  useKeyPress("escape", goBack);
 
   useEffect(() => {
     (async () => {
@@ -56,7 +62,17 @@ export default function Edit() {
           name: product.name,
           price: product.price,
         }}
-        submitSlot={<Button>Save changes</Button>}
+        submitSlot={
+          <div className="space-x-2">
+            <Button type="submit">Save changes</Button>
+            <Button type="button" variant="outline" onClick={goBack}>
+              <span>Cancel </span>
+              <span className="text-muted-foreground rounded-md border bg-white px-2 text-xs">
+                Esc
+              </span>
+            </Button>
+          </div>
+        }
       />
     </div>
   );

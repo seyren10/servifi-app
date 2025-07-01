@@ -6,7 +6,7 @@ type Props = {
 export default function AdminSectionHeading({ description, title }: Props) {
   return (
     <div>
-      <h3 className="text-lg font-medium">{title}</h3>
+      <h3 className="text-lg font-medium capitalize">{title}</h3>
       <p className="text-muted-foreground text-sm">{description}</p>
     </div>
   );

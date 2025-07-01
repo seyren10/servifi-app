@@ -4,8 +4,8 @@ import {
   SelectValue,
   SelectContent,
   SelectItem,
-} from "../../../../components/select";
-import { Button } from "../../../../components/button";
+} from "../../../../../components/select";
+import { Button } from "../../../../../components/button";
 import {
   Form,
   FormField,
@@ -14,15 +14,15 @@ import {
   FormControl,
   FormMessage,
   FormDescription,
-} from "../../../../components/form";
-import { Input } from "../../../../components/input";
-import { Textarea } from "../../../../components/textarea/textarea";
-import { Switch } from "../../../../components/switch";
+} from "../../../../../components/form";
+import { Input } from "../../../../../components/input";
+import { Textarea } from "../../../../../components/textarea/textarea";
+import { Switch } from "../../../../../components/switch";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useRef, type ReactNode } from "react";
-import type { Category } from "../../../../features/category/type";
+import type { Category } from "../../../../../features/category/type";
 
 type Props = {
   defaultValues: Partial<z.infer<typeof productSchema>>;

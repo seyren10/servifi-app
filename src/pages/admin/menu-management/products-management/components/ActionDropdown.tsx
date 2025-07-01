@@ -1,5 +1,5 @@
 import { useState, type PropsWithChildren } from "react";
-import type { Product } from "../../../../features/products/type";
+import type { Product } from "../../../../../features/products/type";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,9 +8,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../../../../components/dropdown-menu";
+} from "../../../../../components/dropdown-menu";
 import { MoreHorizontal, Pencil, ToggleLeft, Trash } from "lucide-react";
-import { Button } from "../../../../components/button";
+import { Button } from "../../../../../components/button";
 import { Link, useFetcher } from "react-router";
 import {
   Dialog,
@@ -21,7 +21,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../../../../components/dialog";
+} from "../../../../../components/dialog";
 
 type Props = PropsWithChildren & {
   product: Product;

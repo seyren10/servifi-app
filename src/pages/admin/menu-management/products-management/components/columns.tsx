@@ -1,10 +1,10 @@
 import type { ColumnDef } from "@tanstack/react-table";
-import type { Product } from "../../../features/products/type";
+import type { Product } from "../../../../../features/products/type";
 import { ArrowUpDown, CheckCircle, XCircle } from "lucide-react";
-import { Image } from "../../../components/image";
-import ActionDropdown from "./components/ActionDropdown";
-import { Button } from "../../../components/button";
-import { cloudinary } from "../../../services/cloudinary/cloudinary";
+import { Image } from "../../../../../components/image";
+import ActionDropdown from "./ActionDropdown";
+import { Button } from "../../../../../components/button";
+import { cloudinary } from "../../../../../services/cloudinary/cloudinary";
 
 export const productColumns: ColumnDef<Product>[] = [
   {

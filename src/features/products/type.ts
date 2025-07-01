@@ -20,3 +20,5 @@ export type CreateProductPayload = Pick<
 };
 
 export type UpdateProductPayload = Partial<CreateProductPayload>;
+
+

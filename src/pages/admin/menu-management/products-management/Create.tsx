@@ -1,13 +1,16 @@
-import AdminSectionHeading from "../../../components/app/AdminSectionHeading";
+import type { Category } from "../../../../features/category/type";
+import AdminSectionHeading from "../../../../components/app/AdminSectionHeading";
 import { z } from "zod";
-import { useFetcher, useLoaderData } from "react-router";
-
+import { useFetcher, useLoaderData, useNavigate } from "react-router";
 import ProductForm, { productSchema } from "./components/ProductForm";
-import type { Category } from "../../../features/category/type";
+import { Button } from "../../../../components/button";
+import { useKeyPress } from "../../../../hooks/useKeyPress";
 
 export default function Create() {
   const fetcher = useFetcher();
   const categories = useLoaderData<Category[]>();
+  const navigate = useNavigate();
+  useKeyPress("escape", goBack);
 
   const onSubmit = (values: z.infer<typeof productSchema>) => {
     const formData = new FormData();
@@ -24,6 +27,10 @@ export default function Create() {
       encType: "multipart/form-data",
     });
   };
+
+  function goBack() {
+    navigate(-1);
+  }
 
   return (
     <div className="space-y-6">
@@ -42,6 +49,17 @@ export default function Create() {
           price: 0,
           category: categories[0]._id,
         }}
+        submitSlot={
+          <div className="flex gap-2">
+            <Button type="submit">Create</Button>
+            <Button type="button" variant="outline" onClick={goBack}>
+              <span>Cancel </span>
+              <span className="text-muted-foreground rounded-md border bg-white px-2 text-xs">
+                Esc
+              </span>
+            </Button>
+          </div>
+        }
       />
     </div>
   );

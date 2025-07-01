@@ -2,6 +2,9 @@ import { type RouteObject } from "react-router";
 import Loader from "../components/app/Loader";
 import Error from "../components/app/Error";
 import { storeHasUser } from "../store";
+import { RedirectToProduct } from "../pages/admin/menu-management/MenuManagement";
+import { adminCategoriesRoute } from "./admin-categories";
+import { adminProductsRoute } from "./admin-products";
 
 export const adminRoutes: RouteObject = {
   path: "/admin",
@@ -108,53 +111,14 @@ export const adminRoutes: RouteObject = {
         Component: async () =>
           (await import("../pages/admin/menu-management/MenuManagement"))
             .default,
-        loader: async () =>
-          (await import("../features/products/loader")).adminProductsLoader,
       },
       children: [
         {
-          path: "create",
-          lazy: {
-            Component: async () =>
-              (await import("../pages/admin/menu-management/Create")).default,
-            loader: async () =>
-              (await import("../features/products/loader")).getCategories,
-            action: async () =>
-              (await import("../features/products/action")).default,
-          },
+          index: true,
+          Component: RedirectToProduct,
         },
-        {
-          path: ":productId",
-          children: [
-            {
-              path: "edit",
-              lazy: {
-                Component: async () =>
-                  (await import("../pages/admin/menu-management/Edit")).default,
-                loader: async () =>
-                  (await import("../features/products/loader")).getProduct,
-                action: async () =>
-                  (await import("../features/products/action")).updateProduct,
-              },
-            },
-            {
-              path: "toggle-availability/:availability",
-              lazy: {
-                action: async () =>
-                  (await import("../features/products/action"))
-                    .toggleAvailabilityAction,
-              },
-            },
-            {
-              path: "delete",
-              lazy: {
-                action: async () =>
-                  (await import("../features/products/action"))
-                    .deleteProductAction,
-              },
-            },
-          ],
-        },
+        adminProductsRoute,
+        adminCategoriesRoute,
       ],
     },
   ],
