@@ -5,6 +5,7 @@ import { storeHasUser } from "../store";
 import { RedirectToProduct } from "../pages/admin/menu-management/MenuManagement";
 import { adminCategoriesRoute } from "./admin-categories";
 import { adminProductsRoute } from "./admin-products";
+import { adminPromosRoute } from "./admin-promos";
 
 export const adminRoutes: RouteObject = {
   path: "/admin",
@@ -119,6 +120,7 @@ export const adminRoutes: RouteObject = {
         },
         adminProductsRoute,
         adminCategoriesRoute,
+        adminPromosRoute,
       ],
     },
   ],

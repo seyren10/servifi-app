@@ -10,3 +10,8 @@ export type ActionResponse = {
   ok: boolean;
   message?: string;
 };
+
+export type WithTimestamp = {
+  updatedAt: string;
+  createdAt: string;
+};

@@ -1,6 +1,7 @@
+import type { WithTimestamp } from "../../types";
 import type { Category } from "../category/type";
 
-export type Product = {
+export type Product = WithTimestamp & {
   _id: string;
   name: string;
   description?: string;
@@ -8,8 +9,6 @@ export type Product = {
   price: number;
   imageUrl?: string;
   availability: boolean;
-  updatedAt: string;
-  createdAt: string;
 };
 
 export type CreateProductPayload = Pick<
@@ -20,5 +19,3 @@ export type CreateProductPayload = Pick<
 };
 
 export type UpdateProductPayload = Partial<CreateProductPayload>;
-
-

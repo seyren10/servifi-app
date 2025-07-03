@@ -79,9 +79,7 @@ export default function ProductForm({
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="after:text-error after:content-['*']">
-                Name
-              </FormLabel>
+              <FormLabel className="field-required">Name</FormLabel>
               <FormControl>
                 <Input {...field} ref={focusElement} autoComplete="name" />
               </FormControl>
@@ -94,9 +92,7 @@ export default function ProductForm({
           name="category"
           render={({ field }) => (
             <FormItem className="[&>button]:w-full">
-              <FormLabel className="after:text-error after:content-['*']">
-                Category
-              </FormLabel>
+              <FormLabel className="field-required">Category</FormLabel>
               <Select
                 name={field.name}
                 onValueChange={field.onChange}
