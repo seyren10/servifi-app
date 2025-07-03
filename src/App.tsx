@@ -22,7 +22,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
 } from "./components/dropdown-menu";
 import CategoryIcon from "./components/app/CategoryIcon";
 import { getCategories } from "./features/category/api";
@@ -61,72 +60,76 @@ export default function App() {
         <div className="overflow-auto">
           {state === "loading" ? <Loader /> : <Outlet />}
         </div>
-        {!!table || categories.length > 0 && (
-          <Nav>
-            {first3Categories.map((category) => (
-              <NavItem
-                title={category.name}
-                icon={<CategoryIcon name={category.icon} />}
-                to={`menu/${category._id}`}
-                key={category._id}
-              />
-            ))}
-            <div className="relative isolate">
-              <NavItem title="orders" icon={<Clipboard />} to="orders" />
-              {hasOrders && (
-                <CircleSmall className="fill-primary absolute -top-1.5 -right-0 size-5" />
-              )}
-            </div>
-            <DropdownMenu>
-              <DropdownMenuTrigger>
-                <NavItem title="more" icon={<Menu />} />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="min-w-48 rounded-xl">
-                {restCategories.length > 0 && (
-                  <>
-                    <DropdownMenuLabel>More</DropdownMenuLabel>
-                    <DropdownMenuGroup>
-                      {restCategories.map((category) => (
-                        <DropdownMenuItem key={category._id} asChild>
-                          <Link to={`menu/${category._id}`}>
-                            <CategoryIcon name={category.icon} />
-                            {category.name}
-                          </Link>
-                        </DropdownMenuItem>
-                      ))}
-                    </DropdownMenuGroup>
-                    <DropdownMenuSeparator />
-                  </>
+        {!!table ||
+          (categories.length > 0 && (
+            <Nav>
+              {first3Categories.map((category) => (
+                <NavItem
+                  title={category.name}
+                  icon={<CategoryIcon name={category.icon} />}
+                  to={`menu/${category._id}`}
+                  key={category._id}
+                />
+              ))}
+              <div className="relative isolate">
+                <NavItem title="orders" icon={<Clipboard />} to="orders" />
+                {hasOrders && (
+                  <CircleSmall className="fill-primary absolute -top-1.5 -right-0 size-5" />
                 )}
-                <DropdownMenuLabel>Services</DropdownMenuLabel>
-                <DropdownMenuGroup>
+              </div>
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <NavItem title="more" icon={<Menu />} />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  align="end"
+                  className="min-w-48 rounded-xl"
+                >
+                  {restCategories.length > 0 && (
+                    <>
+                      <DropdownMenuLabel>More</DropdownMenuLabel>
+                      <DropdownMenuGroup>
+                        {restCategories.map((category) => (
+                          <DropdownMenuItem key={category._id} asChild>
+                            <Link to={`menu/${category._id}`}>
+                              <CategoryIcon name={category.icon} />
+                              {category.name}
+                            </Link>
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuGroup>
+                      <DropdownMenuSeparator />
+                    </>
+                  )}
+                  <DropdownMenuLabel>Services</DropdownMenuLabel>
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem>
+                      <HandPlatter />
+                      Call Waiter
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
                   <DropdownMenuItem>
-                    <HandPlatter />
-                    Call Waiter
+                    <Flame />
+                    Replace Grill Plate
                   </DropdownMenuItem>
-                </DropdownMenuGroup>
-                <DropdownMenuItem>
-                  <Flame />
-                  Replace Grill Plate
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Flame />
-                  Add Charcoal
-                </DropdownMenuItem>
-
-                <DropdownMenuSeparator />
-
-                <DropdownMenuGroup>
-                  <DropdownMenuItem asChild>
-                    <Link to="/orders/completed" className="text-primary">
-                      <CreditCard className="stroke-primary/50" /> Bill Out
-                    </Link>
+                  <DropdownMenuItem>
+                    <Flame />
+                    Add Charcoal
                   </DropdownMenuItem>
-                </DropdownMenuGroup>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </Nav>
-        )}
+
+                  <DropdownMenuSeparator />
+
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem asChild>
+                      <Link to="/orders/completed" className="text-primary">
+                        <CreditCard className="stroke-primary/50" /> Bill Out
+                      </Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </Nav>
+          ))}
       </div>
 
       <Toaster
