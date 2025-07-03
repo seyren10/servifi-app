@@ -2,9 +2,10 @@ import { createPortal } from "react-dom";
 import { Button } from "../../../components/button";
 import { CheckSquare, LoaderCircle, X } from "lucide-react";
 import { useFetcher, useNavigate } from "react-router";
-import { useToastDispatch } from "../../../components/toast";
+
 import { useDispatch } from "react-redux";
 import { resetStore } from "../../../store";
+import { toast } from "sonner";
 
 type Props = {
   onClose?: () => void;
@@ -14,7 +15,6 @@ export default function CompletedOrderBilloutConfirm({ onClose }: Props) {
   const fetcher = useFetcher();
   const loading = fetcher.state !== "idle";
   const navigate = useNavigate();
-  const toast = useToastDispatch();
   const dispatch = useDispatch();
 
   const handleConfirm = async () => {
@@ -24,15 +24,9 @@ export default function CompletedOrderBilloutConfirm({ onClose }: Props) {
     });
 
     dispatch(resetStore());
-
-    toast({
-      type: "toast/add",
-      payload: {
-        title: "Success",
-        type: "success",
-        description: "Thank you for using Servifi! Come back soon.",
-        duration: 10000,
-      },
+    toast.success("Success", {
+      description: "Thank you for using Servifi! Come back soon.",
+      duration: 10000,
     });
 
     navigate("/", { replace: true });

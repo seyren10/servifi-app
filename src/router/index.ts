@@ -8,12 +8,16 @@ import { productRoutes } from "./product";
 import Error from "../components/app/Error";
 import { adminRoutes, authRoutes } from "./admin";
 
+import { loader as AppLoader } from "../App";
+import { getCategories } from "../features/category/api";
+
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: App,
     HydrateFallback: Loader,
     ErrorBoundary: Error,
+    loader: AppLoader,
     children: [
       {
         index: true,
@@ -34,7 +38,8 @@ export const router = createBrowserRouter([
             if (table)
               localStorage.setItem("table-session", JSON.stringify(table));
 
-            return redirect("/menu/682fbbdf73a89bea93bc03ae");
+            const [firstCategory] = await getCategories();
+            return redirect(`/menu/${firstCategory._id}`);
           }
         },
       },
