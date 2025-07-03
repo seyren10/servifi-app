@@ -13,10 +13,10 @@ export default function Order() {
         </div>
 
         <TabsList className="">
-          <TabsLink to="" className="grow text-center">
+          <TabsLink to="" className="grow text-center" match="exact">
             Pending Orders
           </TabsLink>
-          <TabsLink to="completed" className="grow text-center">
+          <TabsLink to="completed" className="grow text-center" match="exact">
             Completed Orders
           </TabsLink>
         </TabsList>
