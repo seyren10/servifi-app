@@ -2,6 +2,7 @@ import { createPortal } from "react-dom";
 import { Button } from "../../../components/button";
 import { CheckSquare, LoaderCircle, X } from "lucide-react";
 import { useFetcher, useNavigate } from "react-router";
+
 import { useDispatch } from "react-redux";
 import { resetStore } from "../../../store";
 import { toast } from "sonner";
@@ -23,7 +24,6 @@ export default function CompletedOrderBilloutConfirm({ onClose }: Props) {
     });
 
     dispatch(resetStore());
-
     toast.success("Success", {
       description: "Thank you for using Servifi! Come back soon.",
       duration: 10000,

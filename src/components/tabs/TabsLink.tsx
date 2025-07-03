@@ -1,4 +1,5 @@
 import React from "react";
+
 import { NavLink, useHref, useLocation, type To } from "react-router";
 
 type Props = {
@@ -27,7 +28,7 @@ export default function TabsLink({
   return (
     <NavLink
       end
-      className={({ isActive }) =>
+      className={() =>
         `relative px-4 py-2 text-sm font-medium ${isActive ? "tabs-active" : undefined} ${className}`
       }
       to={to}

@@ -1,0 +1,12 @@
+todo on menu-management:
+-tab menu for products (CRUD) / 
+
+-tab menu for categories
+ -add crud that includes:
+  - name with icon  /
+  - first 3 will appear on the main category screen on the customer app
+  - others categories wil appear on "more" selection
+
+-tab menu for promos:
+ - e.g all pork for 299, all beef that includes pork + beef for 350
+ - to make restrictions on products

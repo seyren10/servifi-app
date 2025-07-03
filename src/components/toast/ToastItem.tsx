@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import SemanticIcon from "../SemanticIcon";
+import SemanticIcon from "../app/SemanticIcon";
 import { useToastDispatch } from ".";
+import type { SemanticType } from "../../types";
 
 export type ToastItemProps = {
   id: string;
   title: string;
-  type?: "success" | "error" | "info" | "warning";
+  type?: SemanticType;
   description?: string;
   duration?: number;
 };

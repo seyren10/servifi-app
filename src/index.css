@@ -6,9 +6,40 @@
 
 @theme {
     --color-primary: var(--color-indigo-500);
+    --color-primary-foreground: var(--color-indigo-50);
+    --color-secondary: var(--color-gray-300);
+    --color-secondary-foreground: var(--color-gray-700);
     --color-foreground: var(--color-indigo-100);
-    --color-muted: var(--color-gray-100);
-    --color-muted-foreground: var(--color-gray-500)
+    --color-accent: var(--color-gray-100);
+    --color-accent-foreground: var(--color-gray-800);
+    --color-muted: var(--color-gray-200);
+    --color-muted-foreground: var(--color-gray-500);
+    --color-info: var(--color-primary);
+    --color-success: var(--color-primary);
+    --color-warning: var(--color-amber-500);
+    --color-error: var(--color-rose-500);
+    --color-border: var(--color-gray-200);
+    --color-destructive: var(--color-error);
+    --color-input: var(--color-gray-100);
+    --color-popover: white;
+    --color-background: white;
+}
+
+@layer base {
+    * {
+        @apply border-muted
+    }
+}
+
+.semantic-border-info,
+.semantic-border-success {
+    @apply border-info
+}
+.semantic-border-warning {
+    @apply border-warning
+}
+.semantic-border-error {
+    @apply border-error
 }
 
 @layer utilities {
@@ -20,6 +51,9 @@
     .no-spinner::-webkit-inner-spin-button {
         appearance: none;
         margin:0;
+    }
+    .field-required {
+        @apply after:text-error after:content-['*']
     }
 }
 

@@ -2,6 +2,7 @@ import { ShoppingCart } from "lucide-react";
 import type { Product } from "../../../features/products/type";
 import { useDispatch } from "react-redux";
 import { addPendingOrder } from "../../../features/orders/slice";
+
 import { Image } from "../../../components/image";
 import { cloudinary } from "../../../services/cloudinary/cloudinary";
 import { toast } from "sonner";
@@ -22,20 +23,17 @@ export default function MenuItem({ product }: Props) {
   }
   return (
     <li className="grid grid-cols-[6rem_auto_auto] items-center gap-4 rounded-lg p-2">
-      <div className="bg-foreground relative isolate aspect-square overflow-hidden rounded-md">
-        {product.imageUrl && (
-          <img
-            src={`${import.meta.env.VITE_API_BASE_URL}/${product.imageUrl}`}
-            alt={product.name}
-            className={`text-xs ${!product.availability && "grayscale"}`}
-          />
-        )}
+      <Image
+        src={imageUrl}
+        alt={product.name}
+        className={`text-xs ${!product.availability && "grayscale"}`}
+      >
         {!product.availability && (
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black/50 px-1 text-xs font-medium tracking-wide whitespace-nowrap text-white">
             Not Available
           </div>
         )}
-      </div>
+      </Image>
 
       <div className="flex flex-col justify-between gap-1">
         <p className="font-medium capitalize">{product.name}</p>

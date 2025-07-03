@@ -55,7 +55,8 @@ export default function PendingOrderCheckout() {
         </p>
       </div>
       {hasOrders && (
-        <Button onClick={handleOrderCheckout} loading={loading}>
+        <Button onClick={handleOrderCheckout}>
+          {loading && <LoaderCircle className="animate-spin" />}
           Checkout
         </Button>
       )}

@@ -7,7 +7,7 @@ export default function Order() {
   const path = useMatch("/orders");
   return (
     <div>
-      <div className="sticky top-0 space-y-2 bg-white">
+      <div className="sticky top-0 z-50 space-y-2 bg-white">
         <div className="px-4 py-2">
           {path ? <PendingOrderCheckout /> : <CompletedOrderCheckout />}
         </div>

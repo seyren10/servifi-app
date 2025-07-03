@@ -2,10 +2,11 @@ import { createBrowserRouter, redirect } from "react-router";
 import App from "../App";
 import Home from "../Home";
 import { getTableSession } from "../features/tables/api";
-import Loader from "../components/Loader";
+import Loader from "../components/app/Loader";
 import { orderRoutes } from "./orders";
 import { productRoutes } from "./product";
-import Error from "../components/Error";
+import Error from "../components/app/Error";
+import { adminRoutes, authRoutes } from "./admin";
 
 import { loader as AppLoader } from "../App";
 import { getCategories } from "../features/category/api";
@@ -46,6 +47,8 @@ export const router = createBrowserRouter([
       orderRoutes,
     ],
   },
+  adminRoutes,
+  authRoutes,
 ]);
 
 export default router;

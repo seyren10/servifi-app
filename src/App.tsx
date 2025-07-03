@@ -20,6 +20,7 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuTrigger,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./components/dropdown-menu";
@@ -42,6 +43,7 @@ export const loader = async () => {
 export default function App() {
   const dispatch = useDispatch<AppDispatch>();
   const hasOrders = useSelector(selectHasOrders);
+  const table = useSelector(selectTable);
   const { state } = useNavigation();
 
   const categories = useLoaderData<Awaited<ReturnType<typeof loader>>>();
