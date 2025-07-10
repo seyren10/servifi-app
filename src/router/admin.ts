@@ -10,6 +10,7 @@ import { getTables } from "../features/tables/api";
 import { getPromos } from "../features/promos/api";
 import type { Promo } from "../features/promos/type";
 import type { Table } from "../features/tables/type";
+import { adminServicesRoute } from "./admin-services";
 
 export const adminRoutes: RouteObject = {
   path: "/admin",
@@ -127,6 +128,19 @@ export const adminRoutes: RouteObject = {
         adminProductsRoute,
         adminCategoriesRoute,
         adminPromosRoute,
+        adminServicesRoute,
+      ],
+    },
+    {
+      path: "services",
+      children: [
+        {
+          index: true,
+          lazy: {
+            Component: async () =>
+              (await import("../pages/admin/services/Index")).default,
+          },
+        },
       ],
     },
   ],

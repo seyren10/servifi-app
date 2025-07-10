@@ -1,3 +1,10 @@
+07/09/25 TODO:
+- Services interface, with realtime (just like orders)
+- Services will be list in customer services button
+CONTINUE: creating actions for services
+
+
+**COMPLETED**: 
 todo on menu-management:
 -tab menu for products (CRUD) / 
 
