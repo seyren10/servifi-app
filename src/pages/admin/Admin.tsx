@@ -42,7 +42,7 @@ export default function Admin() {
             <AdminSideNavItem Icon={Clipboard} to="./orders">
               Orders
             </AdminSideNavItem>
-            <AdminSideNavItem Icon={HandPlatter} to="./services">
+            <AdminSideNavItem Icon={HandPlatter} to="./ongoing-services">
               Services
             </AdminSideNavItem>
             <AdminSideNavItem Icon={Utensils} to="./menu-management">

@@ -21,7 +21,7 @@ export default function Edit() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="max-w-lg space-y-6">
       <AdminSectionHeading
         title="Edit Service"
         description="Fill out all the necessary changes and save when done."

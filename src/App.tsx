@@ -1,16 +1,15 @@
-import { Link, Outlet, useLoaderData, useNavigation } from "react-router";
 import {
-  CircleSmall,
-  Clipboard,
-  CreditCard,
-  Flame,
-  HandPlatter,
-  Menu,
-} from "lucide-react";
+  Link,
+  Outlet,
+  useFetcher,
+  useLoaderData,
+  useNavigation,
+} from "react-router";
+import { CircleSmall, Clipboard, CreditCard, Menu } from "lucide-react";
 import { Nav, NavItem } from "./components/nav";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch } from "./store";
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { selectTable, setTableFromLocalStorage } from "./features/tables/slice";
 import { selectHasOrders } from "./features/orders/slice";
 import Loader from "./components/app/Loader";
@@ -26,7 +25,12 @@ import {
 import CategoryIcon from "./components/app/CategoryIcon";
 import { getCategories } from "./features/category/api";
 import type { Category } from "./features/category/type";
-import { Toaster } from "sonner";
+import { toast, Toaster } from "sonner";
+import type { createOngoingServiceAction } from "./features/ongoing-service/action";
+
+const ServicesDropdownGroup = lazy(
+  () => import("./components/app/ServicesDropdownGroup"),
+);
 
 export const loader = async () => {
   try {
@@ -49,10 +53,36 @@ export default function App() {
   const first3Categories = categories.slice(0, 3);
   const restCategories = categories.slice(3);
 
+  const fetcher = useFetcher();
+
   useEffect(() => {
     const table = localStorage.getItem("table-session");
     if (table) dispatch(setTableFromLocalStorage(table));
   }, [dispatch]);
+
+  const handleServiceSelect = async (serviceId: string) => {
+    fetcher.submit(
+      {
+        serviceId,
+        tableId: table?._id as string,
+      },
+      {
+        action: "/admin/ongoing-services/request",
+        method: "POST",
+      },
+    );
+  };
+
+  useEffect(() => {
+    if (fetcher.data) {
+      const { message, ok } = fetcher.data as Awaited<
+        ReturnType<typeof createOngoingServiceAction>
+      >;
+      if (!ok) {
+        toast.error(message);
+      } else toast.success(message);
+    }
+  }, [fetcher.data]);
 
   return (
     <>
@@ -83,7 +113,7 @@ export default function App() {
               <DropdownMenuContent align="end" className="min-w-48 rounded-xl">
                 {restCategories.length > 0 && (
                   <>
-                    <DropdownMenuLabel>More</DropdownMenuLabel>
+                    <DropdownMenuLabel>More Categories</DropdownMenuLabel>
                     <DropdownMenuGroup>
                       {restCategories.map((category) => (
                         <DropdownMenuItem key={category._id} asChild>
@@ -98,20 +128,11 @@ export default function App() {
                   </>
                 )}
                 <DropdownMenuLabel>Services</DropdownMenuLabel>
-                <DropdownMenuGroup>
-                  <DropdownMenuItem>
-                    <HandPlatter />
-                    Call Waiter
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-                <DropdownMenuItem>
-                  <Flame />
-                  Replace Grill Plate
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Flame />
-                  Add Charcoal
-                </DropdownMenuItem>
+                <Suspense fallback={<div>Loading...</div>}>
+                  <ServicesDropdownGroup
+                    onServiceSelect={handleServiceSelect}
+                  />
+                </Suspense>
 
                 <DropdownMenuSeparator />
 

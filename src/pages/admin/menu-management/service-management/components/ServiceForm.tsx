@@ -48,7 +48,7 @@ export default function ServiceForm({
             <FormItem>
               <FormLabel className="field-required">Name</FormLabel>
               <FormControl>
-                <Input {...field} autoFocus/>
+                <Input {...field} autoFocus />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -68,13 +68,15 @@ export default function ServiceForm({
           )}
         />
 
-        {submitRender}
-        <Button type="button" variant="outline" onClick={goBack}>
-          <span>Cancel </span>
-          <span className="text-muted-foreground rounded-md border bg-white px-2 text-xs">
-            Esc
-          </span>
-        </Button>
+        <div className="space-x-4">
+          {submitRender}
+          <Button type="button" variant="outline" onClick={goBack}>
+            <span>Cancel </span>
+            <span className="text-muted-foreground rounded-md border bg-white px-2 text-xs">
+              Esc
+            </span>
+          </Button>
+        </div>
       </form>
     </Form>
   );

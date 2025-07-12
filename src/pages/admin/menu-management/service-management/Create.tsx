@@ -3,6 +3,7 @@ import type { createServiceSchema } from "../../../../features/services/validato
 import ServiceForm from "./components/ServiceForm";
 import { useFetcher } from "react-router";
 import { toast } from "sonner";
+import AdminSectionHeading from "../../../../components/app/AdminSectionHeading";
 
 export default function Create() {
   const fetcher = useFetcher();
@@ -16,12 +17,18 @@ export default function Create() {
   };
 
   return (
-    <ServiceForm
-      defaultValues={{
-        name: "",
-        description: "",
-      }}
-      onSubmit={onSubmit}
-    />
+    <div className="max-w-lg space-y-6">
+      <AdminSectionHeading
+        title="Create Service"
+        description="Fill out all the required information to create a new service"
+      />
+      <ServiceForm
+        defaultValues={{
+          name: "",
+          description: "",
+        }}
+        onSubmit={onSubmit}
+      />
+    </div>
   );
 }

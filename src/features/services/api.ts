@@ -1,5 +1,9 @@
 import { http } from "../../lib/axios";
-import type { Service, CreateServicePayload, UpdateServicePayload } from "./type";
+import type {
+  Service,
+  CreateServicePayload,
+  UpdateServicePayload,
+} from "./type";
 
 export const getServices = async () => {
   const res = await http.get<Service[]>("/api/v1/services");
@@ -18,7 +22,10 @@ export const createService = async (payload: CreateServicePayload) => {
   return res.data;
 };
 
-export const updateService = async (id: string, payload: UpdateServicePayload) => {
+export const updateService = async (
+  id: string,
+  payload: UpdateServicePayload,
+) => {
   const res = await http.put<Service>(`/api/v1/services/${id}`, payload);
 
   return res.data;
@@ -27,3 +34,4 @@ export const updateService = async (id: string, payload: UpdateServicePayload) =
 export const deleteService = async (id: string) => {
   await http.delete(`/api/v1/services/${id}`);
 };
+
