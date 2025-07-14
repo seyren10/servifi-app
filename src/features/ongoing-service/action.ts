@@ -19,7 +19,7 @@ export const createOngoingServiceAction = async ({
     return {
       ok: false,
       error: error as AxiosError<{ message: string }> | null,
-      message: "You already requested a service, please try again later.",
+      message: "You already requested a similar service, please try again later.",
     };
   }
 
