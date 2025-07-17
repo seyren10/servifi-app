@@ -1,4 +1,3 @@
-import React from "react";
 import { DataTable } from "../../../../components/app/DataTable";
 import type { TopProduct } from "../../../../features/reports/type";
 

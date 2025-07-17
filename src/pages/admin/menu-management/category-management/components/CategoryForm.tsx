@@ -1,4 +1,4 @@
-import React, { type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { z } from "zod";
 import {
   Form,
@@ -72,7 +72,7 @@ export default function CategoryForm({
               <FormItem>
                 <FormLabel>Category</FormLabel>
                 <FormControl>
-                  <Input {...field} autoFocus/>
+                  <Input {...field} autoFocus />
                 </FormControl>
                 <FormMessage />
               </FormItem>
