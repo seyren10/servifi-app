@@ -48,7 +48,7 @@ export const updatePromoAction = async ({
 
   await updatePromo(promoId, payload);
 
-  return redirect("../../");
+  return redirect("../");
 };
 
 export const deletePromoAction = async ({ params }: ActionFunctionArgs) => {

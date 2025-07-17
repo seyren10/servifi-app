@@ -5,7 +5,7 @@ import OrderCard from "./components/OrderCard";
 import { useSocket } from "../../../hooks/useSocket";
 import { useEffect } from "react";
 import { PackageOpen } from "lucide-react";
-import { useToastDispatch } from "../../../components/toast";
+import { toast } from "sonner";
 
 export default function AdminOrder() {
   const loadedOrders = useLoaderData<Order[]>();
@@ -13,25 +13,18 @@ export default function AdminOrder() {
   const { on, off } = useSocket({
     url: import.meta.env.VITE_API_BASE_URL,
   });
-  const toast = useToastDispatch();
 
   useEffect(() => {
     on("order-created", async () => {
       await revalidator.revalidate();
 
-      toast({
-        type: "toast/add",
-        payload: {
-          title: "A new order has arrived.",
-          type: "info",
-        },
-      });
+      toast.info("A new order has arrived");
     });
 
     return () => {
       off("order-created");
     };
-  }, [off, on, revalidator, toast]);
+  }, [off, on, revalidator]);
 
   return (
     <div className="space-y-4">

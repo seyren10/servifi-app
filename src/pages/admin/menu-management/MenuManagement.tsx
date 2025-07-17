@@ -12,6 +12,7 @@ export default function MenuManagement() {
         <TabsLink to="products">Products</TabsLink>
         <TabsLink to="categories">Categories</TabsLink>
         <TabsLink to="promos">Promos</TabsLink>
+        <TabsLink to="services">Services</TabsLink>
       </TabsList>
 
       <section>

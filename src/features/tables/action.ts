@@ -15,11 +15,12 @@ import type { ActionResponse } from "../../types";
 import type { TableBillOutParams } from "./type";
 
 export default async ({ params }: LoaderFunctionArgs) => {
-  const { id } = params;
+  const { id: tableId, promoId } = params;
 
-  if (!id) throw new Error("No table id");
+  if (!tableId) throw new Error("No table id");
+  if (!promoId) throw new Error("No Promo Id found in params");
 
-  const res = await generateSession(id);
+  const res = await generateSession(tableId, promoId);
 
   return res;
 };

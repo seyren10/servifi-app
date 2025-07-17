@@ -3,7 +3,6 @@ import { getTables, getTable as getTableApi } from "./api";
 
 export default async () => {
   const tables = await getTables();
-
   return tables;
 };
 

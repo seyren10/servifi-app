@@ -10,6 +10,7 @@ import { adminRoutes, authRoutes } from "./admin";
 
 import { loader as AppLoader } from "../App";
 import { getCategories } from "../features/category/api";
+import { ongoingServiceRoutes } from "./ongoing-service";
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +44,7 @@ export const router = createBrowserRouter([
           }
         },
       },
+      ongoingServiceRoutes,
       productRoutes,
       orderRoutes,
     ],

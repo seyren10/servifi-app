@@ -6,6 +6,13 @@ import { RedirectToProduct } from "../pages/admin/menu-management/MenuManagement
 import { adminCategoriesRoute } from "./admin-categories";
 import { adminProductsRoute } from "./admin-products";
 import { adminPromosRoute } from "./admin-promos";
+import { getTables } from "../features/tables/api";
+import { getPromos } from "../features/promos/api";
+import type { Promo } from "../features/promos/type";
+import type { Table } from "../features/tables/type";
+import { adminServicesRoute } from "./admin-services";
+import { ongoingServiceRoutes } from "./ongoing-service";
+import { reportRoutes } from "./reports";
 
 export const adminRoutes: RouteObject = {
   path: "/admin",
@@ -19,6 +26,16 @@ export const adminRoutes: RouteObject = {
     return !storeHasUser();
   },
   children: [
+    {
+      index: true,
+      lazy: {
+        Component: async () =>
+          (await import("../pages/admin/dashboard/Dashboard")).default,
+        loader: async () =>
+          (await import("../features/reports/loader"))
+            .getTransactionReportLoader,
+      },
+    },
     {
       path: "orders",
       lazy: {
@@ -43,14 +60,16 @@ export const adminRoutes: RouteObject = {
       lazy: {
         Component: async () =>
           (await import("../pages/admin/tables/AdminTable")).default,
-        loader: async () => (await import("../features/tables/loader")).default,
+      },
+      loader: async (): Promise<[Table[], Promo[]]> => {
+        return await Promise.all([getTables(), getPromos()]);
       },
       children: [
         {
           path: ":id",
           children: [
             {
-              path: "generate-session",
+              path: "promo/:promoId/generate-session",
               lazy: {
                 Component: async () =>
                   (await import("../pages/admin/tables/GenerateSession"))
@@ -121,8 +140,11 @@ export const adminRoutes: RouteObject = {
         adminProductsRoute,
         adminCategoriesRoute,
         adminPromosRoute,
+        adminServicesRoute,
       ],
     },
+    ongoingServiceRoutes,
+    reportRoutes,
   ],
 };
 

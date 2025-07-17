@@ -29,6 +29,8 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   className?: string;
   filterPlaceholder?: string;
+  disabledSearch?: boolean;
+  disabledPagination?: boolean;
 }
 
 export function DataTable<TData, TValue>({
@@ -36,6 +38,8 @@ export function DataTable<TData, TValue>({
   data,
   className,
   filterPlaceholder,
+  disabledSearch,
+  disabledPagination,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
@@ -58,17 +62,19 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className={twMerge("space-y-4", className)}>
-      <div className="relative isolate flex items-center">
-        <Search className="absolute top-1/2 left-2 size-4 -translate-y-1/2" />
-        <DebouncedInput
-          placeholder={filterPlaceholder}
-          value={globalFilter ?? ""}
-          onChangeDebounced={(val) => {
-            setGlobalFilter(val);
-          }}
-          className="max-w-sm pl-7"
-        />
-      </div>
+      {!disabledSearch && (
+        <div className="relative isolate flex items-center">
+          <Search className="absolute top-1/2 left-2 size-4 -translate-y-1/2" />
+          <DebouncedInput
+            placeholder={filterPlaceholder}
+            value={globalFilter ?? ""}
+            onChangeDebounced={(val) => {
+              setGlobalFilter(val);
+            }}
+            className="max-w-sm pl-7"
+          />
+        </div>
+      )}
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -111,24 +117,26 @@ export function DataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
-      </div>
+      {!disabledPagination && (
+        <div className="flex items-center justify-end space-x-2 py-4">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            Previous
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            Next
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

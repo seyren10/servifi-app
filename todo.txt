@@ -1,3 +1,16 @@
+
+continue working on:
+ -displaying message for the user when they already have a service requested
+
+
+
+**COMPLETED**: 
+07/09/25 TODO:
+- Services interface, with realtime (just like orders)
+
+07-09-25 TODO:
+- Services will be list in customer services button
+
 todo on menu-management:
 -tab menu for products (CRUD) / 
 
