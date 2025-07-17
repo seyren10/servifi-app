@@ -12,6 +12,7 @@ import type { Promo } from "../features/promos/type";
 import type { Table } from "../features/tables/type";
 import { adminServicesRoute } from "./admin-services";
 import { ongoingServiceRoutes } from "./ongoing-service";
+import { reportRoutes } from "./reports";
 
 export const adminRoutes: RouteObject = {
   path: "/admin",
@@ -133,6 +134,7 @@ export const adminRoutes: RouteObject = {
       ],
     },
     ongoingServiceRoutes,
+    reportRoutes,
   ],
 };
 
