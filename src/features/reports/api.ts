@@ -1,5 +1,5 @@
 import { http } from "../../lib/axios";
-import type { DownloadTransactionReportQueryParams } from "./type";
+import type { DownloadTransactionReportQueryParams, Report } from "./type";
 
 export const downloadTransactionReport = async (
   params?: DownloadTransactionReportQueryParams,
@@ -20,4 +20,13 @@ export const downloadTransactionReport = async (
   document.body.appendChild(link);
   link.click();
   link.remove();
+};
+
+export const getTransactionReport = async () => {
+  const res = await http.get<Report>("/api/v1/reports", {
+    params: {
+      top: 10,
+    },
+  });
+  return res.data;
 };

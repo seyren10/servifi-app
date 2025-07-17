@@ -27,6 +27,16 @@ export const adminRoutes: RouteObject = {
   },
   children: [
     {
+      index: true,
+      lazy: {
+        Component: async () =>
+          (await import("../pages/admin/dashboard/Dashboard")).default,
+        loader: async () =>
+          (await import("../features/reports/loader"))
+            .getTransactionReportLoader,
+      },
+    },
+    {
       path: "orders",
       lazy: {
         Component: async () =>
